@@ -23,7 +23,7 @@ public class ProductController extends HttpServlet {
             case "edit":
                 showEditForm(request, response);
                 break;
-            case "add":
+            case "create":
                 showFormAdd(request, response);
                 break;
             case "admin":
@@ -46,8 +46,9 @@ public class ProductController extends HttpServlet {
         dispatcher.forward(request, response);
     }
 
-    private void showEditForm(HttpServletRequest request, HttpServletResponse response) {
-
+    private void showEditForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher dispatcher = request.getRequestDispatcher("admin/create.jsp");
+        dispatcher.forward(request, response);
     }
 
     private void showHome(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -65,13 +66,19 @@ public class ProductController extends HttpServlet {
                 editProduct(request, response);
                 break;
             case "add":
-                addProduct(request, response);
-                break;
+//                addProduct(request, response);
+//                break;
         }
     }
 
     private void editProduct(HttpServletRequest request, HttpServletResponse response) {
         int id =Integer.parseInt(request.getParameter("id"));
+        String name = request.getParameter("name");
+        String detailName = request.getParameter("detailName");
+        String image = request.getParameter("image");
+        double price = Double.parseDouble(request.getParameter("price"));
+        String color = request.getParameter("color");
+        String size = request.getParameter()
 
     }
 }
