@@ -17,25 +17,40 @@
       <label for="name">Tên sản phẩm</label>
       <input type="text" class="form-control" id="name" name="name" placeholder="Name">
     </div>
+
     <div class="form-group">
       <label for="detailName">Mô tả</label>
       <input type="text" class="form-control" id="detailName" name="detailName" placeholder="Detail Name">
     </div>
     <div class="form-group">
-      <label for="price">Giá</label>
-      <input type="number" class="form-control" id="price" name="price" placeholder="Price">
-    </div>
-    <div class="form-group">
       <label for="image">Ảnh</label>
       <input type="text" class="form-control" id="image" name="image" placeholder="Image">
     </div>
+
+    <div class="form-group">
+      <%--@declare id="color"--%><label for="color">Màu</label>
+      <input type="text" class="form-control" id="color" name="color" placeholder="color">
+    </div>
+    <div class="form-group">
+      <label for="size">size</label>
+      <input type="number" class="form-control" id="size" name="size" placeholder="size">
+    </div>
+    <div class="form-group">
+      <label for="cateID">cateID</label>
+      <input type="number" class="form-control" id="cateID" name="cateID" placeholder="cateID">
+    </div>
+    <div class="form-group">
+      <label for="price">Giá</label>
+      <input type="number" class="form-control" id="price" name="price" placeholder="Price">
+    </div>
+
     <div class="form-group">
       <label for="quantity">Số lượng</label>
       <input type="number" class="form-control" id="quantity" name="quantity" placeholder="Quantity">
     </div>
+
     <button type="submit" class="btn btn-primary">Thêm mới</button>
   </form>
-
 </div>
 </body>
 </html>
