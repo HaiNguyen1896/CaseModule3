@@ -73,12 +73,15 @@ public class ProductController extends HttpServlet {
     }
 
     private void showHome(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher dispatcher = request.getRequestDispatcher("user/home.jsp");
+        HttpSession session = request.getSession();
+        int idUser = (int) session.getAttribute("idUser");
+        request.setAttribute("idUser", idUser);
         List<Product> product = productService.findAll();
         List<Category> categories = categoryService.findAll();
         request.setAttribute("Category",categories);
         request.setAttribute("productList", product);
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("user/home.jsp");
-        requestDispatcher.forward(request, response);
+        dispatcher.forward(request, response);
     }
 
     @Override
