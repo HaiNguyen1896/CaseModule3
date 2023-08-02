@@ -1,9 +1,8 @@
 package controller;
-
 import model.Category;
 import model.Product;
+import service.CategoryService;
 import service.ProductService;
-
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
@@ -13,6 +12,7 @@ import java.util.List;
 @WebServlet(name = "ProductController", value = "/user")
 public class ProductController extends HttpServlet {
     private ProductService productService = new ProductService();
+  private CategoryService categoryService = new CategoryService();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -30,15 +30,26 @@ public class ProductController extends HttpServlet {
             case "admin":
                 showFormAdmin(request, response);
                 break;
+            case "manager":
+                showFormManager(request,response);
+                break;
 
         }
+    }
+
+    private void showFormManager(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<Product> product = productService.findAll();
+        List<Category>categories=categoryService.findAll();
+        request.setAttribute("category",categories);
+        request.setAttribute("productList", product);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("admin/admin.jsp");
+        dispatcher.forward(request, response);
     }
 
     private void showFormAdd(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher dispatcher = request.getRequestDispatcher("admin/create.jsp");
         dispatcher.forward(request, response);
     }
-
 
     private void showFormAdmin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Product> product = productService.findAll();
