@@ -23,15 +23,29 @@ public class ProductController extends HttpServlet {
             case "edit":
                 showEditForm(request, response);
                 break;
-            case "add":
+            case "create":
                 showFormAdd(request, response);
                 break;
+            case "admin":
+                showFormAdmin(request, response);
+                break;
+
         }
     }
 
-    private void showFormAdd(HttpServletRequest request, HttpServletResponse response) {
-
+    private void showFormAdd(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher dispatcher = request.getRequestDispatcher("admin/create.jsp");
+        dispatcher.forward(request, response);
     }
+
+
+    private void showFormAdmin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<Product> product = productService.findAll();
+        request.setAttribute("productList", product);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("admin/admin.jsp");
+        dispatcher.forward(request, response);
+    }
+
 
     private void showEditForm(HttpServletRequest request, HttpServletResponse response) {
 
@@ -44,6 +58,7 @@ public class ProductController extends HttpServlet {
         requestDispatcher.forward(request, response);
     }
 
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
@@ -52,13 +67,14 @@ public class ProductController extends HttpServlet {
                 editProduct(request, response);
                 break;
             case "add":
-                addProduct(request, response);
+//                addProduct(request, response);
                 break;
         }
+
     }
 
     private void editProduct(HttpServletRequest request, HttpServletResponse response) {
-        int id =Integer.parseInt(request.getParameter("id"));
+        int id = Integer.parseInt(request.getParameter("id"));
 
     }
 }
