@@ -33,8 +33,8 @@ public class CategoryService implements ICategory<Category> {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
-                int id = rs.getInt("id");
-                String name = rs.getString("name");
+                int id = rs.getInt("cID");
+                String name = rs.getString("cname");
                 Category category = new Category(id, name);
                 categories.add(category);
             }
@@ -47,5 +47,9 @@ public class CategoryService implements ICategory<Category> {
     @Override
     public boolean edit(int id, Category category) {
         return false;
+    }
+
+    public static void main(String[] args) {
+        
     }
 }

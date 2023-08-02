@@ -53,11 +53,11 @@
         </div>
     </div>
 </nav>
-<section class="jumbotron text-center">
+<section class="jumbotron text-center" style="background-color: red">
     <div class="container">
-        <h1 class="jumbotron-heading">Siêu thị giày chất lượng cao</h1>
-        <p class="lead text-muted mb-0">Uy tín tạo nên thương hiệu với hơn 10 năm cung cấp các sản phầm giày nhập từ
-            Trung Quốc</p>
+        <h1 class="jumbotron-heading">Thương hiệu thời trang hàng đầu Việt Nam</h1>
+        <h2 class="jumbotron-heading" style="color: gold">Uy tín là vàng</h2>
+
     </div>
 </section>
 <div class="container">
@@ -66,7 +66,7 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="http://localhost:8080/user?action=home">Trang chủ</a></li>
-                    <li class="breadcrumb-item"><a href="#">Các loại giày</a></li>
+                    <li class="breadcrumb-item"><a href="#">Các loại áo</a></li>
                 </ol>
             </nav>
         </div>
@@ -76,11 +76,11 @@
     <div class="row">
         <div class="col-sm-3">
             <div class="card bg-light mb-3">
-                <div class="card-header bg-primary text-white text-uppercase"><i class="fa fa-list"></i> Các loại giày
+                <div class="card-header bg-primary text-white text-uppercase"><i class="fa fa-list"></i> Các loại áo
                 </div>
                 <ul class="list-group category_block">
-                    <c:forEach var="product" items="${productList}">
-                        <li class="list-group-item text-white"><a href="#">${product.name}</a></li>
+                    <c:forEach var="categories" items="${Category}">
+                        <li class="list-group-item text-white"><a href="#">${categories.name}</a></li>
                     </c:forEach>
                 </ul>
             </div>

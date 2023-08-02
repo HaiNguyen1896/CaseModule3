@@ -40,9 +40,9 @@ public class ProductController extends HttpServlet {
     private void showFormManager(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Product> product = productService.findAll();
         List<Category>categories=categoryService.findAll();
-        request.setAttribute("category",categories);
+        request.setAttribute("Category",categories);
         request.setAttribute("productList", product);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("admin/admin.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("Manager/ManagerProduct.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -65,6 +65,8 @@ public class ProductController extends HttpServlet {
 
     private void showHome(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Product> product = productService.findAll();
+        List<Category> categories = categoryService.findAll();
+        request.setAttribute("Category",categories);
         request.setAttribute("productList", product);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("user/home.jsp");
         requestDispatcher.forward(request, response);
