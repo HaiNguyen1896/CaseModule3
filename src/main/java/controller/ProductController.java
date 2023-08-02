@@ -33,8 +33,17 @@ public class ProductController extends HttpServlet {
             case "manager":
                 showFormManager(request,response);
                 break;
+            case "delete":
+                deleteProduct(request,response);
+                break;
 
         }
+    }
+
+    private void deleteProduct(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        productService.deleteProduct(id);
+        response.sendRedirect("http://localhost:8080/user?action=home");
     }
 
     private void showFormManager(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
