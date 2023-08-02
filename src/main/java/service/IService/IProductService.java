@@ -6,5 +6,5 @@ public interface IProductService<E> {
     void add (E e);
     void delete(int id);
     List<E> findAll();
-    void edit (int id);
+    boolean edit (int id, E e);
 }

@@ -19,7 +19,6 @@ CREATE TABLE category
     cID   INT         NOT NULL primary key,
     cname VARCHAR(50) NOT NULL
 );
-
 CREATE TABLE product
 (
     id      INT AUTO_INCREMENT PRIMARY KEY,
@@ -30,10 +29,8 @@ CREATE TABLE product
     color   VARCHAR(255) not null,
     size    int not null,
     cateID  INT          not null,
-    sell_ID int          not null,
     quantity int not null,
-    foreign key (cateID) references category (cID),
-    foreign key (sell_ID) references account (uID)
+    foreign key (cateID) references category (cID)
 );
 create table cart
 (
@@ -60,7 +57,7 @@ INSERT into account (uID, user, pass,address,tel, role_id)
 VALUES (1, 'admin', 'admin', '124A Trương Định',0953253453,1);
 INSERT into account (user, pass, address,tel,role_id)
 VALUES ('user', 'user', '125A Bà triệu',0924252344,0);
-INSERT into product (name,detailName, image, price, color, size,quantity, cateID, sell_ID)
+INSERT into product (name,detailName, image, price, color, size,quantity, cateID)
 VALUES ('Giày thể thao','Giày thể thao nam Adidas Nova Run',
         'https://canary.contestimg.wish.com/api/webimage/5f5ad3f3706bf3003d7acbd3-normal.jpg?cache_buster=10f7d3b88daf4019fa9d8be157793111',
-        100.0000, 'Màu đỏ', '39',10, 1, 1);
+        100.0000, 'Màu đỏ', '39',10, 1);
