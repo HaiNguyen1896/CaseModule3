@@ -1,5 +1,6 @@
 package controller;
 
+import model.Category;
 import model.Product;
 import service.ProductService;
 
@@ -65,20 +66,40 @@ public class ProductController extends HttpServlet {
             case "edit":
                 editProduct(request, response);
                 break;
-            case "add":
-//                addProduct(request, response);
-//                break;
+            case "create":
+                addProduct(request, response);
+                break;
         }
     }
 
-    private void editProduct(HttpServletRequest request, HttpServletResponse response) {
+    private void addProduct(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String name = request.getParameter("name");
+        String detailName = request.getParameter("detailName");
+        String image = request.getParameter("image");
+        double price = Double.parseDouble(request.getParameter("price"));
+        String color = request.getParameter("color");
+        int size = Integer.parseInt(request.getParameter("size"));
+        int cateID = Integer.parseInt(request.getParameter("cateID"));
+        int quantity = Integer.parseInt(request.getParameter("quantity"));
+        Category category = new Category(cateID);
+        Product product = new Product(name,detailName,image,price,color,size,quantity,category);
+        productService.add(product);
+        response.sendRedirect("http://localhost:8080/user?action=home");
+    }
+
+    private void editProduct(HttpServletRequest request, HttpServletResponse response) throws IOException {
         int id =Integer.parseInt(request.getParameter("id"));
         String name = request.getParameter("name");
         String detailName = request.getParameter("detailName");
         String image = request.getParameter("image");
         double price = Double.parseDouble(request.getParameter("price"));
         String color = request.getParameter("color");
-        String size = request.getParameter()
-
+        int size = Integer.parseInt(request.getParameter("size"));
+        int cateID = Integer.parseInt(request.getParameter("cateID"));
+        int quantity = Integer.parseInt(request.getParameter("quantity"));
+        Category category = new Category(cateID);
+        Product product = new Product(name,detailName,image,price,color,size,quantity,category);
+        productService.edit(id,product);
+        response.sendRedirect("http://localhost:8080/user?action=home");
     }
 }

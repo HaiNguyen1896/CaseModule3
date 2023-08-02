@@ -17,7 +17,21 @@ public class ProductService implements IProductService<Product> {
 
     @Override
     public void add(Product product) {
-
+        String sql = "insert into product (name, detailName, image, price, color, size, cateID, quantity) values(?,?,?,?,?,?,?,?);";
+        try (
+            PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setString(1, product.getName());
+            preparedStatement.setString(2, product.getDetailName());
+            preparedStatement.setString(3, product.getImage());
+            preparedStatement.setDouble(4, product.getPrice());
+            preparedStatement.setString(5,product.getColor());
+            preparedStatement.setInt(6,product.getSize());
+            preparedStatement.setInt(7,product.getCategory().getId());
+            preparedStatement.setInt(8,product.getQuantity());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -56,9 +70,9 @@ public class ProductService implements IProductService<Product> {
     @Override
     public boolean edit(int id, Product product) {
         boolean rowUpdate;
-        String sql = "update product set name = ?, detailName=?,image=?,price=?,color=?,size=?,cateID=?,quantity=?  where id = ?;";
+        String sql = "update product set name = ?, detailName=?,image=?,price=?,color=?,size=?,cateID=?,quantity=? where id = ?;";
         try (
-                PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setString(1, product.getName());
             preparedStatement.setString(2, product.getDetailName());
             preparedStatement.setString(3, product.getImage());
