@@ -5,10 +5,10 @@ private int uID;
 private String user;
 private String pass;
 private String address;
-private int tel;
+private String tel;
 private Role role;
 
-    public Account(int uID, String user, String pass, String address, int tel, Role role) {
+    public Account(int uID, String user, String pass, String address, String tel, Role role) {
         this.uID = uID;
         this.user = user;
         this.pass = pass;
@@ -49,11 +49,11 @@ private Role role;
         this.address = address;
     }
 
-    public int getTel() {
+    public String getTel() {
         return tel;
     }
 
-    public void setTel(int tel) {
+    public void setTel(String tel) {
         this.tel = tel;
     }
 

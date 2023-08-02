@@ -58,15 +58,17 @@ public class ProductService implements IProductService<Product> {
         boolean rowUpdate;
         String sql = "update product set name = ?, detailName=?,image=?,price=?,color=?,size=?,cateID=?,quantity=?  where id = ?;";
         try (
-                PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setString(1, product.getName());
-            statement.setString(2, product.getDetailName());
-            statement.setString(3, product.getImage());
-            statement.setDouble(4, product.getPrice());
-            statement.setInt(5, product.getSize());
-            statement.setInt(6, product.getCategory().getId());
-            statement.setInt(7, product.getQuantity());
-            rowUpdate = statement.executeUpdate() > 0;
+                PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setString(1, product.getName());
+            preparedStatement.setString(2, product.getDetailName());
+            preparedStatement.setString(3, product.getImage());
+            preparedStatement.setDouble(4, product.getPrice());
+            preparedStatement.setString(5, product.getColor());
+            preparedStatement.setInt(6, product.getSize());
+            preparedStatement.setInt(7, product.getCategory().getId());
+            preparedStatement.setInt(8, product.getQuantity());
+            preparedStatement.setInt(9, id);
+            rowUpdate = preparedStatement.executeUpdate() > 0;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

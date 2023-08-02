@@ -10,7 +10,7 @@ CREATE TABLE account
     user    VARCHAR(255) not null ,
     pass    VARCHAR(255) not null ,
     address varchar(255) not null,
-    tel int null ,
+    tel varchar(255) null ,
     role_id int not null,
     foreign key (role_ID) references role(id)
 );
@@ -54,9 +54,9 @@ insert into role(id,name) values (0,'user');
 INSERT into category(cID, cname)
 VALUES (1, N'GIÀY ADIDAS');
 INSERT into account (uID, user, pass,address,tel, role_id)
-VALUES (1, 'admin', 'admin', '124A Trương Định',0953253453,1);
+VALUES (1, 'admin', 'admin', '124A Trương Định','0953253453',1);
 INSERT into account (user, pass, address,tel,role_id)
-VALUES ('user', 'user', '125A Bà triệu',0924252344,0);
+VALUES ('user', 'user', '125A Bà triệu','0924252344',0);
 INSERT into product (name,detailName, image, price, color, size,quantity, cateID)
 VALUES ('Giày thể thao','Giày thể thao nam Adidas Nova Run',
         'https://canary.contestimg.wish.com/api/webimage/5f5ad3f3706bf3003d7acbd3-normal.jpg?cache_buster=10f7d3b88daf4019fa9d8be157793111',
