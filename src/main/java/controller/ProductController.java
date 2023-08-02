@@ -16,6 +16,8 @@ public class ProductController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        boolean check = filter.UserSession.checkSession(request);
+        if (check) {
         String action = request.getParameter("action");
         switch (action) {
             case "home":
@@ -38,6 +40,9 @@ public class ProductController extends HttpServlet {
                 break;
 
         }
+    } else {
+        response.sendRedirect("/user?action=login");
+    }
     }
 
     private void deleteProduct(HttpServletRequest request, HttpServletResponse response) throws IOException {
