@@ -1,6 +1,5 @@
 package controller;
 
-import model.Category;
 import model.Product;
 import service.ProductService;
 
@@ -27,11 +26,24 @@ public class ProductController extends HttpServlet {
             case "add":
                 showFormAdd(request, response);
                 break;
+            case "admin":
+                showFormAdmin(request, response);
+                break;
+
         }
     }
 
-    private void showFormAdd(HttpServletRequest request, HttpServletResponse response) {
+    private void showFormAdd(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher dispatcher = request.getRequestDispatcher("admin/create.jsp");
+        dispatcher.forward(request, response);
+    }
 
+
+    private void showFormAdmin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<Product> product = productService.findAll();
+        request.setAttribute("productList", product);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("admin/admin.jsp");
+        dispatcher.forward(request, response);
     }
 
     private void showEditForm(HttpServletRequest request, HttpServletResponse response) {
@@ -58,34 +70,8 @@ public class ProductController extends HttpServlet {
         }
     }
 
-    private void addProduct(HttpServletRequest request, HttpServletResponse response) {
-        String name = request.getParameter("name");
-        String detailName = request.getParameter("detalName");
-        String img = request.getParameter("img");
-        double price = Double.parseDouble(request.getParameter("price"));
-        String color = request.getParameter("color");
-        int size = Integer.parseInt(request.getParameter("size"));
-        int cateID = Integer.parseInt(request.getParameter("cateID"));
-        Category category = new Category(cateID);
-        int quantity = Integer.parseInt(request.getParameter("quantity"));
-        Product product = new Product(name,detailName,img,price,color,size,quantity,category);
-
-        response.sendRedirect("http://localhost:8080/user?action=home");
-    }
-
-    private void editProduct(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    private void editProduct(HttpServletRequest request, HttpServletResponse response) {
         int id =Integer.parseInt(request.getParameter("id"));
-        String name = request.getParameter("name");
-        String detailName = request.getParameter("detalName");
-        String img = request.getParameter("img");
-        double price = Double.parseDouble(request.getParameter("price"));
-        String color = request.getParameter("color");
-        int size = Integer.parseInt(request.getParameter("size"));
-        int cateID = Integer.parseInt(request.getParameter("cateID"));
-        Category category = new Category(cateID);
-        int quantity = Integer.parseInt(request.getParameter("quantity"));
-        Product product = new Product(id,name,detailName,img,price,color,size,quantity,category);
-        productService.edit(id,product);
-        response.sendRedirect("http://localhost:8080/user?action=home");
+
     }
 }
