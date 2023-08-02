@@ -31,23 +31,29 @@ public class ProductService implements IProductService<Product> {
     public List<Product> findProduct(String search) {
         List<Product> productList = new ArrayList<>();
         try {
-            String sql = "SELECT * FROM products WHERE name LIKE ?";
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1, "%" + search + "%");
-            ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                int id = resultSet.getInt("id");
-                String name = resultSet.getString("name");
-                String image = resultSet.getString("image");
-                double price = resultSet.getDouble("price");
-                String color = resultSet.getString("color");
-                int size = resultSet.getInt("size");
-                int categoryId = resultSet.getInt("category_id");
-                int accountId = resultSet.getInt("account_id");
-                Category category = getCategoryById(categoryId);
-                Account account = getAccountById(accountId);
-                Product product = new Product(id, name, image, price, color, size, category, account);
-                productList.add(product);
+            Connection connection = ConnectToMySQL.getConnection();
+            if (connection != null) {
+                String sql = "SELECT * FROM product WHERE name like concat('%',?,'%')";
+                PreparedStatement statement = connection.prepareStatement(sql);
+                statement.setString(1, search);
+                ResultSet resultSet = statement.executeQuery();
+                while (resultSet.next()) {
+                    int id = resultSet.getInt("id");
+                    String name = resultSet.getString("name");
+                    String image = resultSet.getString("image");
+                    double price = resultSet.getDouble("price");
+                    String color = resultSet.getString("color");
+                    int size = resultSet.getInt("size");
+                    int categoryId = resultSet.getInt("cateID");
+                    int sellId = resultSet.getInt("sell_ID");
+                    Category category = getCategoryById(categoryId);
+                    Account account = getAccountById(sellId);
+                    if (category != null && account != null) {
+                        Product product = new Product(id, name, image, price, color, size, category, account);
+                        productList.add(product);
+                    }
+                }
+                connection.close();
             }
         } catch (SQLException e) {
             e.printStackTrace();
