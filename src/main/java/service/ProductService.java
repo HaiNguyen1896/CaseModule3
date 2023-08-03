@@ -48,6 +48,8 @@ public class ProductService implements IProductService<Product> {
         return rowDeleted;
     }
 
+
+
     @Override
     public List<Product> findAll() {
         List<Product> products = new ArrayList<>();
@@ -123,13 +125,14 @@ public class ProductService implements IProductService<Product> {
         }
         return product;
     }
+
     public List<Product> findAllByCategory(int idCategory) {
         List<Product> products = new ArrayList<>();
         String sql = "select p.*, c.cname as 'ProductCategory' from product p inner join category c on p.cateID=c.cID where p.cateID=?;";
         try {
 
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setInt(1,idCategory);
+            preparedStatement.setInt(1, idCategory);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 int idProduct = rs.getInt("id");
@@ -151,81 +154,54 @@ public class ProductService implements IProductService<Product> {
         return products;
     }
 
-    @Override
-    public List<Product> findProduct(String search) {
-        List<Product> productList = new ArrayList<>();
-        try {
-            Connection connection = ConnectToMySQL.getConnection();
-            if (connection != null) {
-                String sql = "SELECT * FROM product WHERE name like concat('%',?,'%')";
-                PreparedStatement statement = connection.prepareStatement(sql);
-                statement.setString(1, search);
-                ResultSet rs = statement.executeQuery();
-                while (rs.next()) {
-                    int id = rs.getInt("id");
-                    String name = rs.getString("name");
-                    String detailName = rs.getString("detailName");
-                    String image = rs.getString("image");
-                    double price = rs.getDouble("price");
-                    String color = rs.getString("color");
-                    String size = rs.getString("size");
-                    int quantity = rs.getInt("quantity");
-                    int categoryId = rs.getInt("cateID");
-                    Category category = getCategoryById(categoryId);
-                    if (category != null) {
-                        Product product = new Product(id, name,detailName, image, price, color, size, quantity, category);
-                        productList.add(product);
-                    }
-                }
-                connection.close();
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return productList;
-    }
-
-    @Override
-    public List<Product> sortProductsByCategoryId(int categoryId) {
+    public List<Product> SortByIncreasePrice() {
         List<Product> products = new ArrayList<>();
-        String sql = "SELECT p.*, c.cname as 'ProductCategory' FROM product p INNER JOIN category c ON p.cateID=c.cID WHERE p.cateID=? ORDER BY p.cateID ASC;";
+        String sql = "select p.*, c.cname as 'ProductCategory' from product p inner join category c on p.cateID=c.cID order by price;";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setInt(1, categoryId);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
-                int id = rs.getInt("id");
+                int idProduct = rs.getInt("id");
                 String name = rs.getString("name");
                 String detailName = rs.getString("detailName");
                 String image = rs.getString("image");
                 double price = rs.getDouble("price");
                 String color = rs.getString("color");
                 String size = rs.getString("size");
+                int idCategory = rs.getInt("cateID");
+                String nameCategory = rs.getString("ProductCategory");
                 int quantity = rs.getInt("quantity");
-                Category category = new Category(categoryId, rs.getString("ProductCategory"));
-                products.add(new Product(id, name, detailName, image, price, color, size, quantity, category));
+                Category category = new Category(idCategory, nameCategory);
+                products.add(new Product(idProduct, name, detailName, image, price, color, size, quantity, category));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return products;
     }
-
-    private Category getCategoryById(int categoryId) {
-        Category category = null;
+    public List<Product> SortByDecreasePrice() {
+        List<Product> products = new ArrayList<>();
+        String sql = "select p.*, c.cname as 'ProductCategory' from product p inner join category c on p.cateID=c.cID order by price desc ;";
         try {
-            String sql = "SELECT * FROM category WHERE cID=?";
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setInt(1, categoryId);
-            ResultSet rs = statement.executeQuery();
-            if (rs.next()) {
-                int cID = rs.getInt("cID");
-                String cname = rs.getString("cname");
-                category = new Category(cID, cname);
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                int idProduct = rs.getInt("id");
+                String name = rs.getString("name");
+                String detailName = rs.getString("detailName");
+                String image = rs.getString("image");
+                double price = rs.getDouble("price");
+                String color = rs.getString("color");
+                String size = rs.getString("size");
+                int idCategory = rs.getInt("cateID");
+                String nameCategory = rs.getString("ProductCategory");
+                int quantity = rs.getInt("quantity");
+                Category category = new Category(idCategory, nameCategory);
+                products.add(new Product(idProduct, name, detailName, image, price, color, size, quantity, category));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return category;
+        return products;
     }
 }

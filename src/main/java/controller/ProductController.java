@@ -45,7 +45,27 @@ public class ProductController extends HttpServlet {
             case "addToCart":
                 addCart(request, response);
                 break;
+            case "sortIncrease":
+                sortIncrs(request,response);
+                break;
+            case "sortDecrease":
+                sortDecrs(request,response);
+                break;
+
         }
+    }
+    private void sortDecrs(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<Product>products = productService.SortByDecreasePrice();
+        request.setAttribute("productList",products);
+        RequestDispatcher requestDispatcher=request.getRequestDispatcher("user/home.jsp");
+        requestDispatcher.forward(request,response);
+    }
+
+    private void sortIncrs(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<Product>products = productService.SortByIncreasePrice();
+        request.setAttribute("productList",products);
+        RequestDispatcher requestDispatcher=request.getRequestDispatcher("user/home.jsp");
+        requestDispatcher.forward(request,response);
     }
 
     private void addCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -92,6 +112,8 @@ public class ProductController extends HttpServlet {
     private void showFormAdmin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Product> product = productService.findAll();
         request.setAttribute("productList", product);
+        List<Category> categories = categoryService.findAll();
+        request.setAttribute("Category", categories);
         RequestDispatcher dispatcher = request.getRequestDispatcher("admin/admin.jsp");
         dispatcher.forward(request, response);
     }
