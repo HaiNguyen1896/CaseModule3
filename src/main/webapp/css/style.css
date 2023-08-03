@@ -1,3 +1,42 @@
+.list-group-item:hover {
+    background-color: aqua;
+    cursor: pointer;
+
+}
+
+.list-group-item a {
+    text-decoration: none;
+}
+
+.list-group-item a:hover {
+    background-color: aqua;
+    cursor: pointer;
+}
+
+.card-title a,
+.btn {
+    text-decoration: none;
+}
+
+.card-title a:hover,
+.btn:hover {
+    text-decoration: none;
+}
+
+.list-group-item a {
+    font-size: 18px;
+}
+
+.breadcrumb-item a {
+    font-size: 18px;
+}
+
+.card.bg-light.mb-3 {
+    border: 2px solid #ccc;
+    padding: 20px;
+}
+
+
 /* Đặt độ cao cho section jumbotron */
 .jumbotron {
     padding: 2rem 1rem;
