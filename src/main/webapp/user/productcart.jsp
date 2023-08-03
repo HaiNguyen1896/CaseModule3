@@ -30,18 +30,13 @@
 <!-- header -->
 <nav class="navbar navbar-expand-md navbar-dark sticky-top bg-dark">
     <div class="container">
-        <a class="navbar-brand" href="https://nentang.vn">Nền tảng</a>
+        <a class="navbar-brand" href="http://localhost:8080/user?action=home">G3Shop</a>
         <div class="navbar-collapse collapse" id="navbarCollapse">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="../index.html">Trang chủ <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="http://localhost:8080/user?action=home">Trang chủ</span></a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="https://nentang.vn">Quản trị</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="products.html">Sản phẩm</a>
-                </li>
+
                 <li class="nav-item">
                     <a class="nav-link" href="about.html">Giới thiệu</a>
                 </li>
@@ -96,37 +91,37 @@
 
                     <tbody>
                     <c:forEach var="product" items="${productList}">
-                        <tr>
-                            <td>${product.id}</td>
-                            <td>
-                                <img src="${product.image}" class="hinhdaidien" style="width: 200px; height: 200px">
-                            </td>
-                            <td>${product.detailName}</td>
-                            <td class="text-right"><input name="quantity" type="number" id="quantity_${product.id}"></td>
-                            <td class="text-right" name="productPrice" id="price_${product.id}" onchange="calculateTotalPrice()">${product.price}</td>
-                            <td class="text-right"><label id="totalPrice_${product.id}"></label></td>
-                            <td>
-                                <!-- Nút xóa, bấm vào sẽ xóa thông tin dựa vào khóa chính `sp_ma` -->
-                                <a id="delete_1" data-sp-ma="2" class="btn btn-danger btn-delete-sanpham">
-                                    <i class="fa fa-trash" aria-hidden="true"></i> Xóa
-                                </a>
-                            </td>
-                        </tr>
+                    <tr>
+                        <td>${product.id}</td>
+                        <td>
+                            <img src="${product.image}" class="hinhdaidien" style="width: 100%;height: 100% ">
+                        </td>
+                        <td>${product.detailName}</td>
+                        <td class="text-right"><input name="quantity"></td>
+                        <td class="text-right">${product.price}</td>
+                        <td class="text-right"><input name="totalPrice"></td>
+                        <td>
+                            <!-- Nút xóa, bấm vào sẽ xóa thông tin dựa vào khóa chính `sp_ma` -->
+                            <a id="delete_1" data-sp-ma="2" class="btn btn-danger btn-delete-sanpham">
+                                <i class="fa fa-trash" aria-hidden="true"></i> Xóa
+                            </a>
+                        </td>
+                    </tr>
                     </c:forEach>
                     </tbody>
 
 
-                    <a href="../index.html" class="btn btn-warning btn-md"><i class="fa fa-arrow-left"
-                                                                              aria-hidden="true"></i>&nbsp;Quay
-                        về trang chủ</a>
-                    <a href="checkout.html" class="btn btn-primary btn-md"><i
-                            class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;Thanh toán</a>
+                <a href="http://localhost:8080/user?action=home" class="btn btn-warning btn-md"><i class="fa fa-arrow-left"
+                                                                          aria-hidden="true"></i>&nbsp;Quay
+                    về trang chủ</a>
+                <a href="checkout.html" class="btn btn-primary btn-md" style="margin-left: 20px"><i
+                        class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;Thanh toán</a>
 
                 </table>
-            </div>
+                </div>
         </div>
     </div>
-    <!-- End block content -->
+        <!-- End block content -->
 </main>
 
 <!-- footer -->
@@ -136,7 +131,7 @@
         <span class="text-muted">Hành trang tới Tương lai</span>
 
         <p class="float-right">
-            <a href="#">Về đầu trang</a>
+            <a href="http://localhost:8080/user?action=home">Về đầu trang</a>
         </p>
     </div>
 </footer>

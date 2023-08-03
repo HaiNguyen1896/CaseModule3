@@ -112,6 +112,8 @@ public class ProductController extends HttpServlet {
     private void showFormAdmin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Product> product = productService.findAll();
         request.setAttribute("productList", product);
+        List<Category> categories = categoryService.findAll();
+        request.setAttribute("Category", categories);
         RequestDispatcher dispatcher = request.getRequestDispatcher("admin/admin.jsp");
         dispatcher.forward(request, response);
     }
