@@ -67,8 +67,8 @@
           </td>
           <td>${product.price} $</td>
           <td>
-            <a href="loadProduct?pid=${product.id}"  class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Xửa">&#xE254;</i></a>
-            <a href="delete?pid=${product.id}" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Xoá">&#xE872;</i></a>
+            <a href="http://localhost:8080/user?action=edit&id=${product.id}"  class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Sửa">&#xE254;</i></a>
+            <a href="http://localhost:8080/user?action=delete&id=${product.id}" class="delete"><i class="material-icons" title="Xoá">&#xE872;</i></a>
           </td>
         </tr>
       </c:forEach>

@@ -44,11 +44,11 @@
                             <i class="fa fa-search"></i>
                         </button>
                     </div>
+                    <a class="btn btn-success btn-sm ml-3" href="#">
+                        <i class="fa fa-shopping-cart"></i> Giỏ hàng
+                    </a>
                 </div>
-                <a class="btn btn-success btn-sm ml-3" href="#">
-                    <i class="fa fa-shopping-cart"></i> Giỏ hàng
-                    <span class="badge badge-light">3</span>
-                </a>
+
             </form>
         </div>
     </div>
