@@ -7,10 +7,10 @@ public class Product {
     private String image;
     private double price;
     private String color;
-    private int size;
+    private String size;
     private int quantity;
     private Category category;
-    public Product(int id, String name, String detailName, String image, double price, String color, int size, int quantity) {
+    public Product(int id, String name, String detailName, String image, double price, String color, String size, int quantity) {
         this.id = id;
         this.name = name;
         this.detailName = detailName;
@@ -20,7 +20,7 @@ public class Product {
         this.size = size;
         this.quantity = quantity;
     }
-    public Product(int id, String name, String detailName, String image, double price, String color, int size, int quantity, Category category) {
+    public Product(int id, String name, String detailName, String image, double price, String color, String size, int quantity, Category category) {
         this.id = id;
         this.name = name;
         this.detailName = detailName;
@@ -31,7 +31,7 @@ public class Product {
         this.quantity = quantity;
         this.category = category;
     }
-    public Product(String name, String detailName, String image, double price, String color, int size, int quantity, Category category) {
+    public Product(String name, String detailName, String image, double price, String color, String size, int quantity, Category category) {
         this.name = name;
         this.detailName = detailName;
         this.image = image;
@@ -91,11 +91,11 @@ public class Product {
         this.color = color;
     }
 
-    public int getSize() {
+    public String getSize() {
         return size;
     }
 
-    public void setSize(int size) {
+    public void setSize(String size) {
         this.size = size;
     }
 
@@ -113,20 +113,5 @@ public class Product {
 
     public void setCategory(Category category) {
         this.category = category;
-    }
-
-    @Override
-    public String toString() {
-        return "Product{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", detailName='" + detailName + '\'' +
-                ", image='" + image + '\'' +
-                ", price=" + price +
-                ", color='" + color + '\'' +
-                ", size=" + size +
-                ", quantity=" + quantity +
-                ", category=" + category +
-                '}';
     }
 }

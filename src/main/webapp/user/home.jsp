@@ -80,7 +80,7 @@
                 </div>
                 <ul class="list-group category_block">
                     <c:forEach var="categories" items="${Category}">
-                        <li class="list-group-item text-white"><a href="#">${categories.name}</a></li>
+                        <li class="list-group-item text-white"><a href="http://localhost:8080/user?action=findAllByCategory&id=${categories.id}">${categories.name}</a></li>
                     </c:forEach>
                 </ul>
             </div>
@@ -102,7 +102,7 @@
                                         <p class="btn btn-danger btn-block">${product.price} $</p>
                                     </div>
                                     <div class="col">
-                                        <a href="#" class="btn btn-success btn-block">Add to cart</a>
+                                        <a href="http://localhost:8080/user?action=addToCart&id=${product.id}" class="btn btn-success btn-block">Add to cart</a>
                                     </div>
                                 </div>
                             </div>
