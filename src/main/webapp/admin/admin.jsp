@@ -202,27 +202,6 @@
     <div class="row">
         <div class="col-sm-3">
             <div class="card bg-light mb-3">
-                <div class="card-header bg-primary text-white text-uppercase"><i class="fa fa-list"></i> Các loại áo
-                </div>
-                <ul class="list-group category_block">
-                    <c:forEach var="categories" items="${Category}">
-                        <li class="list-group-item text-white"><a
-                                href="http://localhost:8080/user?action=findAllByCategory&id=${categories.id}">${categories.name}</a>
-                        </li>
-                    </c:forEach>
-                </ul>
-            </div>
-            <div class="card bg-light mb-3">
-                <div class="card-header bg-primary text-white text-uppercase"><i class="fa fa-list"></i> Sắp xếp theo
-                </div>
-                <ul class="list-group category_block">
-                    <li class="list-group-item text-white"><a href="#">GIÁ TĂNG DẦN</a></li>
-                    <li class="list-group-item text-white"><a href="#">Giá GIẢM DẦN</a></li>
-                </ul>
-            </div>
-
-
-            <div class="card bg-light mb-3">
                 <div class="card-header bg-success text-white text-uppercase">Last product</div>
                 <div class="card-body">
                     <img class="img-fluid"

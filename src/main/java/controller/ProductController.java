@@ -52,11 +52,16 @@ public class ProductController extends HttpServlet {
                 sortDecrs(request,response);
                 break;
 
+
         }
     }
+
+
     private void sortDecrs(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Product>products = productService.SortByDecreasePrice();
         request.setAttribute("productList",products);
+        List<Category> categories = categoryService.findAll();
+        request.setAttribute("Category", categories);
         RequestDispatcher requestDispatcher=request.getRequestDispatcher("user/home.jsp");
         requestDispatcher.forward(request,response);
     }
@@ -64,6 +69,8 @@ public class ProductController extends HttpServlet {
     private void sortIncrs(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Product>products = productService.SortByIncreasePrice();
         request.setAttribute("productList",products);
+        List<Category> categories = categoryService.findAll();
+        request.setAttribute("Category", categories);
         RequestDispatcher requestDispatcher=request.getRequestDispatcher("user/home.jsp");
         requestDispatcher.forward(request,response);
     }

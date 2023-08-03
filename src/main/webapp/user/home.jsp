@@ -188,7 +188,7 @@
     <div class="container">
         <h1 class="display-4" style="font-weight: bold; color: #333;">Thương hiệu thời trang hàng đầu Việt Nam</h1>
         <h2 style="color: gold; font-size: 28px;">Uy tín là vàng</h2>
-        <p style="font-size: 20px; color: #666;">Chào mừng đến với cửa hàng thời trang Nền tảng. Chúng tôi cam kết mang
+        <p style="font-size: 20px; color: #666">Chào mừng đến với cửa hàng Áo cao cấp G3 Shop. Chúng tôi cam kết mang
             đến cho bạn những sản phẩm thời trang chất lượng nhất và dịch vụ tốt nhất.</p>
         <%--        <a class="btn btn-primary btn-lg" href="#" role="button">Xem sản phẩm</a>--%>
     </div>
@@ -210,8 +210,8 @@
                 <div class="card-header bg-primary text-white text-uppercase"><i class="fa fa-list"></i> Sắp xếp theo
                 </div>
                 <ul class="list-group category_block">
-                    <li class="list-group-item text-white"><a href="#">GIÁ TĂNG DẦN</a></li>
-                    <li class="list-group-item text-white"><a href="#">Giá GIẢM DẦN</a></li>
+                    <li class="list-group-item text-white"><a href="http://localhost:8080/user?action=sortIncrease">GIÁ TĂNG DẦN</a></li>
+                    <li class="list-group-item text-white"><a href="http://localhost:8080/user?action=sortDecrease">Giá GIẢM DẦN</a></li>
                 </ul>
             </div>
 
@@ -223,7 +223,7 @@
                          src="https://oldsailor.com.vn/vnt_upload/product/08_2023/5ad50238abdc788221cd27.jpg"/>
                     <h5 class="card-title">Áo thun</h5>
                     <p class="card-text">Áo thun họa tiết Old Sailor - O.S.L Tennis tee</p>
-                    <p class="bloc_left_price">325000 $</p>
+                    <p class="bloc_left_price">325000 VNĐ</p>
                 </div>
             </div>
 

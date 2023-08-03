@@ -56,7 +56,7 @@ INSERT into category(cname)VALUES ('ÁO THUN');
 INSERT into category(cname)VALUES ('ÁO POLOS');
 INSERT into category(cname)VALUES ('ÁO SƠ MI');
 INSERT into category(cname)VALUES ('ÁO KHOÁC');
-INSERT into account (uID, user,customerName, pass,address,tel, role_id)
+INSERT into account (uID, user, pass,customerName,address,tel, role_id)
 VALUES (1, 'admin', 'admin','Đoàn Hữu Linh' ,'124A Trương Định','0953253453',1);
 INSERT into account (user, pass,customerName, address,tel,role_id)
 VALUES ('user', 'user','Trịnh Việt Anh' ,'125A Bà triệu','0924252344',0);

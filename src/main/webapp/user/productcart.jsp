@@ -34,7 +34,7 @@
         <div class="navbar-collapse collapse" id="navbarCollapse">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="http://localhost:8080/user?action=home">Trang chủ</span></a>
+                    <a class="nav-link" href="http://localhost:8080/user?action=home">Trang chủ</a>
                 </li>
 
                 <li class="nav-item">

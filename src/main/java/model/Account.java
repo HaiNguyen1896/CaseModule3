@@ -1,17 +1,19 @@
 package model;
 
 public class Account {
-private int uID;
-private String user;
-private String pass;
-private String address;
-private String tel;
-private Role role;
+    private int uID;
+    private String user;
+    private String pass;
+    private String customerName;
+    private String address;
+    private String tel;
+    private Role role;
 
-    public Account(int uID, String user, String pass, String address, String tel, Role role) {
+    public Account(int uID, String user, String pass, String customerName, String address, String tel, Role role) {
         this.uID = uID;
         this.user = user;
         this.pass = pass;
+        this.customerName = customerName;
         this.address = address;
         this.tel = tel;
         this.role = role;
@@ -63,5 +65,13 @@ private Role role;
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
     }
 }
