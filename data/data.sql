@@ -1,6 +1,5 @@
 create database shopG3;
 use shopG3;
-
 create  table role(
                       id int primary key default 0,
                       name varchar(20) check(name='admin' or name='user')
@@ -10,6 +9,7 @@ CREATE TABLE account
     uID     INT AUTO_INCREMENT PRIMARY KEY,
     user    VARCHAR(255) not null ,
     pass    VARCHAR(255) not null ,
+    customerName varchar(255) not null ,
     address varchar(255) not null,
     tel varchar(255) null ,
     role_id int not null,
@@ -56,10 +56,10 @@ INSERT into category(cname)VALUES ('ÁO THUN');
 INSERT into category(cname)VALUES ('ÁO POLOS');
 INSERT into category(cname)VALUES ('ÁO SƠ MI');
 INSERT into category(cname)VALUES ('ÁO KHOÁC');
-INSERT into account (uID, user, pass,address,tel, role_id)
-VALUES (1, 'admin', 'admin', '124A Trương Định','0953253453',1);
-INSERT into account (user, pass, address,tel,role_id)
-VALUES ('user', 'user', '125A Bà triệu','0924252344',0);
+INSERT into account (uID, user,customerName, pass,address,tel, role_id)
+VALUES (1, 'admin', 'admin','Đoàn Hữu Linh' ,'124A Trương Định','0953253453',1);
+INSERT into account (user, pass,customerName, address,tel,role_id)
+VALUES ('user', 'user','Trịnh Việt Anh' ,'125A Bà triệu','0924252344',0);
 INSERT into product (name,detailName, image, price, color, size,quantity, cateID)
 VALUES ('Áo thun','Áo thun họa tiết Old Sailor - O.S.L Tennis tee',
         'https://oldsailor.com.vn/vnt_upload/product/08_2023/5ad50238abdc788221cd27.jpg',

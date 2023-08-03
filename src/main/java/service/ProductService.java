@@ -123,13 +123,14 @@ public class ProductService implements IProductService<Product> {
         }
         return product;
     }
+
     public List<Product> findAllByCategory(int idCategory) {
         List<Product> products = new ArrayList<>();
         String sql = "select p.*, c.cname as 'ProductCategory' from product p inner join category c on p.cateID=c.cID where p.cateID=?;";
         try {
 
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setInt(1,idCategory);
+            preparedStatement.setInt(1, idCategory);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 int idProduct = rs.getInt("id");
@@ -140,6 +141,57 @@ public class ProductService implements IProductService<Product> {
                 String color = rs.getString("color");
                 String size = rs.getString("size");
 //                int idCategory = rs.getInt("cateID");
+                String nameCategory = rs.getString("ProductCategory");
+                int quantity = rs.getInt("quantity");
+                Category category = new Category(idCategory, nameCategory);
+                products.add(new Product(idProduct, name, detailName, image, price, color, size, quantity, category));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return products;
+    }
+
+    public List<Product> SortByIncreasePrice() {
+        List<Product> products = new ArrayList<>();
+        String sql = "select p.*, c.cname as 'ProductCategory' from product p inner join category c on p.cateID=c.cID order by price;";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                int idProduct = rs.getInt("id");
+                String name = rs.getString("name");
+                String detailName = rs.getString("detailName");
+                String image = rs.getString("image");
+                double price = rs.getDouble("price");
+                String color = rs.getString("color");
+                String size = rs.getString("size");
+                int idCategory = rs.getInt("cateID");
+                String nameCategory = rs.getString("ProductCategory");
+                int quantity = rs.getInt("quantity");
+                Category category = new Category(idCategory, nameCategory);
+                products.add(new Product(idProduct, name, detailName, image, price, color, size, quantity, category));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return products;
+    }
+    public List<Product> SortByDecreasePrice() {
+        List<Product> products = new ArrayList<>();
+        String sql = "select p.*, c.cname as 'ProductCategory' from product p inner join category c on p.cateID=c.cID order by price desc ;";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                int idProduct = rs.getInt("id");
+                String name = rs.getString("name");
+                String detailName = rs.getString("detailName");
+                String image = rs.getString("image");
+                double price = rs.getDouble("price");
+                String color = rs.getString("color");
+                String size = rs.getString("size");
+                int idCategory = rs.getInt("cateID");
                 String nameCategory = rs.getString("ProductCategory");
                 int quantity = rs.getInt("quantity");
                 Category category = new Category(idCategory, nameCategory);

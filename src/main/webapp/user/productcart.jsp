@@ -9,9 +9,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Nền tảng - Kiến thức cơ bản về WEB | Bảng tin</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+          integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+            crossorigin="anonymous"></script>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap.min.css" type="text/css">
     <!-- Font awesome -->
@@ -91,34 +96,34 @@
 
                     <tbody>
                     <c:forEach var="product" items="${productList}">
-                    <tr>
-                        <td>${product.id}</td>
-                        <td>
-                            <img src="${product.image}" class="hinhdaidien">
-                        </td>
-                        <td>${product.detailName}</td>
-                        <td class="text-right"><input name="quantity"></td>
-                        <td class="text-right">${product.price}</td>
-                        <td class="text-right"><input name="totalPrice"></td>
-                        <td>
-                            <!-- Nút xóa, bấm vào sẽ xóa thông tin dựa vào khóa chính `sp_ma` -->
-                            <a id="delete_1" data-sp-ma="2" class="btn btn-danger btn-delete-sanpham">
-                                <i class="fa fa-trash" aria-hidden="true"></i> Xóa
-                            </a>
-                        </td>
-                    </tr>
+                        <tr>
+                            <td>${product.id}</td>
+                            <td>
+                                <img src="${product.image}" class="hinhdaidien" style="width: 200px; height: 200px">
+                            </td>
+                            <td>${product.detailName}</td>
+                            <td class="text-right"><input name="quantity" type="number" id="quantity_${product.id}"></td>
+                            <td class="text-right" name="productPrice" id="price_${product.id}" onchange="calculateTotalPrice()">${product.price}</td>
+                            <td class="text-right"><label id="totalPrice_${product.id}"></label></td>
+                            <td>
+                                <!-- Nút xóa, bấm vào sẽ xóa thông tin dựa vào khóa chính `sp_ma` -->
+                                <a id="delete_1" data-sp-ma="2" class="btn btn-danger btn-delete-sanpham">
+                                    <i class="fa fa-trash" aria-hidden="true"></i> Xóa
+                                </a>
+                            </td>
+                        </tr>
                     </c:forEach>
                     </tbody>
 
 
-                <a href="../index.html" class="btn btn-warning btn-md"><i class="fa fa-arrow-left"
-                                                                          aria-hidden="true"></i>&nbsp;Quay
-                    về trang chủ</a>
-                <a href="checkout.html" class="btn btn-primary btn-md"><i
-                        class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;Thanh toán</a>
+                    <a href="../index.html" class="btn btn-warning btn-md"><i class="fa fa-arrow-left"
+                                                                              aria-hidden="true"></i>&nbsp;Quay
+                        về trang chủ</a>
+                    <a href="checkout.html" class="btn btn-primary btn-md"><i
+                            class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;Thanh toán</a>
 
                 </table>
-                </div>
+            </div>
         </div>
     </div>
     <!-- End block content -->
@@ -149,3 +154,13 @@
 </body>
 
 </html>
+
+<script>
+    let total = document.getElementById("totalPrice")
+    function calculateTotalPrice(productID) {
+        let x = document.getElementById("price_${product.id}").value;
+        let y = document.getElementById("quantity_${productId}").value;
+        let totalPrice=x*y;
+        document.getElementById(totalPrice_${productId}).innerText=totalPrice
+    }
+</script>
