@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link href="css/manager.css" rel="stylesheet" type="text/css"/>
+    <link href="../css/style.css" rel="stylesheet" type="text/css"/>
     <style>
         img {
             width: 200px;
@@ -40,7 +40,6 @@
                 <form action="http://localhost:8080/user?action=edit" method="post">
                     <div class="modal-header">
                         <h4 class="modal-title">Thêm sản phẩm mới</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
@@ -92,8 +91,8 @@
 
                     </div>
                     <div class="modal-footer">
-                        <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                        <input type="submit" class="btn btn-success" value="Edit">
+                        <a href="http://localhost:8080/user?action=manager" class="btn btn-default" data-dismiss="modal" > Huỷ bỏ</a>
+                        <input type="submit" class="btn btn-success" value="Sửa">
                     </div>
                 </form>
             </div>
