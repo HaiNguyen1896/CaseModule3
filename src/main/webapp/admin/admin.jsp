@@ -147,6 +147,10 @@
             color: #ffc107;
         }
 
+         #editEmployeeModal {
+             display: none;
+         }
+
     </style>
 </head>
 <body>
@@ -164,6 +168,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="contact.html">Liên hệ</a>
                 </li>
+
             </ul>
             <div class="d-flex flex-nowrap align-items-center" style="margin-left: 20px">
                 <form class="form-inline mt-2 mt-md-0" method="get" action="search.html">
@@ -174,12 +179,11 @@
             </div>
         </div>
         <ul class="navbar-nav px-3">
-            <li class="nav-item text-nowrap">
-                <a class="nav-link" href="cart.html">Giỏ hàng</a>
+            <li class="nav-item">
+                <a class="nav-link" href="http://localhost:8080/user?action=manager">Quản lý sản phẩm</a>
             </li>
             <li class="nav-item text-nowrap">
-                <!-- Nếu chưa đăng nhập thì hiển thị nút Đăng nhập -->
-                <a class="nav-link" href="login.html">Đăng nhập</a>
+                <a class="nav-link" href="login.html">Admin</a>
             </li>
         </ul>
     </div>
@@ -202,7 +206,9 @@
                 </div>
                 <ul class="list-group category_block">
                     <c:forEach var="categories" items="${Category}">
-                        <li class="list-group-item text-white"><a href="http://localhost:8080/user?action=findAllByCategory&id=${categories.id}">${categories.name}</a></li>
+                        <li class="list-group-item text-white"><a
+                                href="http://localhost:8080/user?action=findAllByCategory&id=${categories.id}">${categories.name}</a>
+                        </li>
                     </c:forEach>
                 </ul>
             </div>
@@ -234,19 +240,17 @@
                 <c:forEach var="product" items="${productList}">
                     <div class="col-12 col-md-6 col-lg-4">
                         <div class="card">
-                            <img class="card-img-top" src="${product.image}" alt="Card image cap" height="250"
-                                 width="250">
+                            <img class="card-img-top" src="${product.image}" alt="Card image cap" height="250" width="250">
                             <div class="card-body">
-                                <h4 class="card-title show_txt"><a href="#" title="View Product">${product.name}</a>
-                                </h4>
+                                <h4 class="card-title show_txt"><a href="#" title="View Product">${product.name}</a></h4>
                                 <p class="card-text show_txt">${product.detailName}</p>
                                 <div class="row">
                                     <div class="col">
                                         <p class="btn btn-danger btn-block">${product.price} $</p>
                                     </div>
+
                                     <div class="col">
-                                        <a href="http://localhost:8080/user?action=addToCart&id=${product.id}"
-                                           class="btn btn-success btn-block" style="margin-left: 30px">Mua ngay</a>
+                                        <a href="http://localhost:8080/user?action=edit&id=${product.id}" class="btn btn-warning btn-block" style="margin-left: 30px">Thông tin</a>
                                     </div>
                                 </div>
                             </div>
@@ -255,6 +259,72 @@
                 </c:forEach>
             </div>
         </div>
+    </div>
+    <div id="editEmployeeModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form action="http://localhost:8080/user?action=edit" method="post">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Thêm sản phẩm mới</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>ID</label>
+                            <input name="id" type="number" class="form-control" value="${product.id}" readonly required>
+                        </div>
+                        <div class="form-group">
+                            <label>Tên sản phẩm</label>
+                            <input name="name" type="text" class="form-control" value="${product.name}" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Ảnh sản phẩm</label>
+                            <input name="image" type="text" class="form-control" value="${product.image}" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Mô tả sản phẩm</label>
+                            <input name="detailName" type="text" class="form-control"  value="${product.detailName}" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Giá sản phẩm</label>
+                            <input name="price" type="number" class="form-control" value="${product.price}" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Size</label>
+                            <input name="size" type="text" class="form-control" value="${product.size}" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Màu sản phẩm</label>
+                            <input name="color" type="text" class="form-control" value="${product.color}" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Số lượng sản phẩm</label>
+                            <input name="quantity" type="number" class="form-control" value="${product.quantity}" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Loại sản phẩm</label>
+                            <select name="category" class="form-select" aria-label="Default select example">
+                                <c:forEach items="${Category}" var="categories">
+                                    <option value="${categories.id}">"${categories.name}"</option>
+                                </c:forEach>
+                            </select>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                        <input type="submit" class="btn btn-success" value="Edit">
+                    </div>
+                </form>
+            </div>
+        </div>
+
     </div>
 </div>
 </body>

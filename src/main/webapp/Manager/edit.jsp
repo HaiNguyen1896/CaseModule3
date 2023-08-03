@@ -37,44 +37,48 @@
     <div id="editEmployeeModal">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form action="add" method="post">
+                <form action="http://localhost:8080/user?action=edit" method="post">
                     <div class="modal-header">
                         <h4 class="modal-title">Thêm sản phẩm mới</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
+                            <label>ID</label>
+                            <input name="id" type="number" class="form-control" value="${product.id}" readonly required>
+                        </div>
+                        <div class="form-group">
                             <label>Tên sản phẩm</label>
-                            <input name="name" type="text" class="form-control" required>
+                            <input name="name" type="text" class="form-control" value="${product.name}" required>
                         </div>
 
                         <div class="form-group">
                             <label>Ảnh sản phẩm</label>
-                            <input name="image" type="text" class="form-control" required>
+                            <input name="image" type="text" class="form-control" value="${product.image}" required>
                         </div>
 
                         <div class="form-group">
                             <label>Mô tả sản phẩm</label>
-                            <input name="detailName" type="text" class="form-control" required>
+                            <input name="detailName" type="text" class="form-control"  value="${product.detailName}" required>
                         </div>
 
                         <div class="form-group">
                             <label>Giá sản phẩm</label>
-                            <input name="price" type="number" class="form-control" required>
+                            <input name="price" type="number" class="form-control" value="${product.price}" required>
                         </div>
 
                         <div class="form-group">
                             <label>Size</label>
-                            <input name="size" type="text" class="form-control" required>
+                            <input name="size" type="text" class="form-control" value="${product.size}" required>
                         </div>
 
                         <div class="form-group">
                             <label>Màu sản phẩm</label>
-                            <input name="color" type="text" class="form-control" required>
+                            <input name="color" type="text" class="form-control" value="${product.color}" required>
                         </div>
                         <div class="form-group">
                             <label>Số lượng sản phẩm</label>
-                            <input name="quantity" type="number" class="form-control" required>
+                            <input name="quantity" type="number" class="form-control" value="${product.quantity}" required>
                         </div>
 
                         <div class="form-group">
@@ -89,7 +93,7 @@
                     </div>
                     <div class="modal-footer">
                         <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                        <input type="submit" class="btn btn-success" value="Add">
+                        <input type="submit" class="btn btn-success" value="Edit">
                     </div>
                 </form>
             </div>

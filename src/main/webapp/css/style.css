@@ -1,15 +1,87 @@
-.header{
-    background-color: red;
-    text-align: center;
+/* Đặt độ cao cho section jumbotron */
+.jumbotron {
+    padding: 2rem 1rem;
+    margin-bottom: 2rem;
+    background-color: #dc3545; /* Màu nền */
+    color: #ffc107; /* Màu chữ */
 }
 
-.w3-bar-block {
-
-    height: 100%;
+/* Đặt kích thước chữ và màu chữ cho tiêu đề */
+.jumbotron .jumbotron-heading {
+    font-size: 48px;
+    color: #fff;
 }
 
-.card-omg {
-    width: 50%; /* Set the desired width */
-    height: 200px; /* Set the desired height */
-    object-fit: cover; /* This will make sure the image covers the entire container while maintaining its aspect ratio */
+/* Đặt kích thước chữ và màu chữ cho tiêu đề phụ */
+.jumbotron .jumbotron-subheading {
+    font-size: 36px;
+    color: #fff;
+}
+
+/* Tùy chỉnh giao diện của navbar */
+.navbar {
+    padding: 0.5rem 1rem;
+    background-color: #343a40; /* Màu nền */
+}
+
+/* Đặt màu chữ cho navbar link */
+.navbar .nav-link {
+    color: #fff;
+}
+
+/* Đặt màu chữ khi hover đến các navbar link */
+.navbar .nav-link:hover {
+    color: #ffc107;
+}
+
+/* Đặt màu chữ cho navbar brand */
+.navbar .navbar-brand {
+    color: #fff;
+}
+
+/* Đặt màu chữ khi hover đến navbar brand */
+.navbar .navbar-brand:hover {
+    color: #ffc107;
+}
+
+/* Tùy chỉnh giao diện của nút Tìm kiếm trong form */
+.navbar .form-inline .btn {
+    color: #fff;
+    border-color: #fff;
+}
+
+/* Đặt màu chữ khi hover đến nút Tìm kiếm trong form */
+.navbar .form-inline .btn:hover {
+    color: #343a40;
+    background-color: #ffc107;
+    border-color: #ffc107;
+}
+
+/* Tùy chỉnh giao diện cho nút "Giỏ hàng" và "Đăng nhập" */
+.navbar-nav .nav-item .nav-link {
+    color: #fff;
+}
+
+/* Đặt màu chữ khi hover đến các nút "Giỏ hàng" và "Đăng nhập" */
+.navbar-nav .nav-item .nav-link:hover {
+    color: #ffc107;
+}
+
+/* Đặt chiều cao và kích thước chữ cho section breadcrumb */
+.breadcrumb {
+    padding: 0.75rem 1rem;
+    background-color: #f8f9fa; /* Màu nền */
+    color: #343a40; /* Màu chữ */
+    font-size: 18px; /* Kích thước chữ */
+}
+
+/* Đặt kích thước chữ và màu chữ cho breadcrumb link */
+.breadcrumb .breadcrumb-item a {
+    font-size: 18px;
+    color: #343a40;
+}
+
+/* Đặt màu chữ khi hover đến breadcrumb link */
+.breadcrumb .breadcrumb-item a:hover {
+    color: #ffc107;
 }
