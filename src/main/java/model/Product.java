@@ -3,23 +3,45 @@ package model;
 public class Product {
     private int id;
     private String name;
+    private String detailName;
     private String image;
     private double price;
     private String color;
-    private int size;
+    private String size;
+    private int quantity;
     private Category category;
-    private Account account;
-
-    public Product(int id, String name, String image, double price, String color, int size, Category category, Account account) {
+    public Product(int id, String name, String detailName, String image, double price, String color, String size, int quantity) {
         this.id = id;
         this.name = name;
+        this.detailName = detailName;
         this.image = image;
         this.price = price;
         this.color = color;
         this.size = size;
-        this.category = category;
-        this.account = account;
+        this.quantity = quantity;
     }
+    public Product(int id, String name, String detailName, String image, double price, String color, String size, int quantity, Category category) {
+        this.id = id;
+        this.name = name;
+        this.detailName = detailName;
+        this.image = image;
+        this.price = price;
+        this.color = color;
+        this.size = size;
+        this.quantity = quantity;
+        this.category = category;
+    }
+    public Product(String name, String detailName, String image, double price, String color, String size, int quantity, Category category) {
+        this.name = name;
+        this.detailName = detailName;
+        this.image = image;
+        this.price = price;
+        this.color = color;
+        this.size = size;
+        this.quantity = quantity;
+        this.category = category;
+    }
+
 
     public int getId() {
         return id;
@@ -35,6 +57,14 @@ public class Product {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getDetailName() {
+        return detailName;
+    }
+
+    public void setDetailName(String detailName) {
+        this.detailName = detailName;
     }
 
     public String getImage() {
@@ -61,12 +91,20 @@ public class Product {
         this.color = color;
     }
 
-    public int getSize() {
+    public String getSize() {
         return size;
     }
 
-    public void setSize(int size) {
+    public void setSize(String size) {
         this.size = size;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     public Category getCategory() {
@@ -75,13 +113,5 @@ public class Product {
 
     public void setCategory(Category category) {
         this.category = category;
-    }
-
-    public Account getAccount() {
-        return account;
-    }
-
-    public void setAccount(Account account) {
-        this.account = account;
     }
 }

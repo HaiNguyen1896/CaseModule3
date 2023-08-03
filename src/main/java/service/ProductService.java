@@ -1,10 +1,8 @@
 package service;
 
 import fillter.ConnectToMySQL;
-import model.Account;
 import model.Category;
 import model.Product;
-import model.Role;
 import service.IService.IProductService;
 
 import java.sql.Connection;
@@ -19,12 +17,138 @@ public class ProductService implements IProductService<Product> {
 
     @Override
     public void add(Product product) {
-
+        String sql = "insert into product (name, detailName, image, price, color, size, cateID, quantity) values(?,?,?,?,?,?,?,?);";
+        try (
+                PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setString(1, product.getName());
+            preparedStatement.setString(2, product.getDetailName());
+            preparedStatement.setString(3, product.getImage());
+            preparedStatement.setDouble(4, product.getPrice());
+            preparedStatement.setString(5, product.getColor());
+            preparedStatement.setString(6, product.getSize());
+            preparedStatement.setInt(7, product.getCategory().getId());
+            preparedStatement.setInt(8, product.getQuantity());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
-    public void delete(int id) {
+    public boolean deleteProduct(int id) {
+        boolean rowDeleted;
+        String sql = "delete from product where id = ?;";
+        try (
+                PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setInt(1, id);
+            rowDeleted = preparedStatement.executeUpdate() > 0;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return rowDeleted;
+    }
 
+    @Override
+    public List<Product> findAll() {
+        List<Product> products = new ArrayList<>();
+        String sql = "select p.*, c.cname as 'ProductCategory' from product p inner join category c on p.cateID=c.cID;";
+        try {
+
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                String detailName = rs.getString("detailName");
+                String image = rs.getString("image");
+                double price = rs.getDouble("price");
+                String color = rs.getString("color");
+                String size = rs.getString("size");
+                int idCategory = rs.getInt("cateID");
+                String nameCategory = rs.getString("ProductCategory");
+                int quantity = rs.getInt("quantity");
+                Category category = new Category(idCategory, nameCategory);
+                products.add(new Product(id, name, detailName, image, price, color, size, quantity, category));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return products;
+    }
+
+    @Override
+    public boolean edit(int id, Product product) {
+        boolean rowUpdate;
+        String sql = "update product set name = ?, detailName=?,image=?,price=?,color=?,size=?,cateID=?,quantity=? where id = ?;";
+        try (
+                PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setString(1, product.getName());
+            preparedStatement.setString(2, product.getDetailName());
+            preparedStatement.setString(3, product.getImage());
+            preparedStatement.setDouble(4, product.getPrice());
+            preparedStatement.setString(5, product.getColor());
+            preparedStatement.setString(6, product.getSize());
+            preparedStatement.setInt(7, product.getCategory().getId());
+            preparedStatement.setInt(8, product.getQuantity());
+            preparedStatement.setInt(9, id);
+            rowUpdate = preparedStatement.executeUpdate() > 0;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return rowUpdate;
+    }
+
+    public Product selectProduct(int id) {
+        Product product = null;
+        String sql = "select name,image,detailName,price,size,color,quantity,cateID from product where id=?;";
+        try (
+                PreparedStatement preparedStatement = connection.prepareStatement(sql);) {
+            preparedStatement.setInt(1, id);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                String name = rs.getString("name");
+                String img = rs.getString("image");
+                String detailName = rs.getString("detailName");
+                int price = rs.getInt("price");
+                String size = rs.getString("size");
+                String color = rs.getString("color");
+                int quantity = rs.getInt("quantity");
+                int cateID = rs.getInt("cateID");
+                Category category = new Category(cateID);
+                product = new Product(id, name, detailName, img, price, color, size, quantity, category);
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return product;
+    }
+    public List<Product> findAllByCategory(int idCategory) {
+        List<Product> products = new ArrayList<>();
+        String sql = "select p.*, c.cname as 'ProductCategory' from product p inner join category c on p.cateID=c.cID where p.cateID=?;";
+        try {
+
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1,idCategory);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                int idProduct = rs.getInt("id");
+                String name = rs.getString("name");
+                String detailName = rs.getString("detailName");
+                String image = rs.getString("image");
+                double price = rs.getDouble("price");
+                String color = rs.getString("color");
+                String size = rs.getString("size");
+//                int idCategory = rs.getInt("cateID");
+                String nameCategory = rs.getString("ProductCategory");
+                int quantity = rs.getInt("quantity");
+                Category category = new Category(idCategory, nameCategory);
+                products.add(new Product(idProduct, name, detailName, image, price, color, size, quantity, category));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return products;
     }
 
     @Override
@@ -36,20 +160,20 @@ public class ProductService implements IProductService<Product> {
                 String sql = "SELECT * FROM product WHERE name like concat('%',?,'%')";
                 PreparedStatement statement = connection.prepareStatement(sql);
                 statement.setString(1, search);
-                ResultSet resultSet = statement.executeQuery();
-                while (resultSet.next()) {
-                    int id = resultSet.getInt("id");
-                    String name = resultSet.getString("name");
-                    String image = resultSet.getString("image");
-                    double price = resultSet.getDouble("price");
-                    String color = resultSet.getString("color");
-                    int size = resultSet.getInt("size");
-                    int categoryId = resultSet.getInt("cateID");
-                    int sellId = resultSet.getInt("sell_ID");
+                ResultSet rs = statement.executeQuery();
+                while (rs.next()) {
+                    int id = rs.getInt("id");
+                    String name = rs.getString("name");
+                    String detailName = rs.getString("detailName");
+                    String image = rs.getString("image");
+                    double price = rs.getDouble("price");
+                    String color = rs.getString("color");
+                    String size = rs.getString("size");
+                    int quantity = rs.getInt("quantity");
+                    int categoryId = rs.getInt("cateID");
                     Category category = getCategoryById(categoryId);
-                    Account account = getAccountById(sellId);
-                    if (category != null && account != null) {
-                        Product product = new Product(id, name, image, price, color, size, category, account);
+                    if (category != null) {
+                        Product product = new Product(id, name,detailName, image, price, color, size, quantity, category);
                         productList.add(product);
                     }
                 }
@@ -62,26 +186,29 @@ public class ProductService implements IProductService<Product> {
     }
 
     @Override
-    public void edit(int id) {
-
-    }
-
-    private Role getRoleById(int roleId) {
-        Role role = null;
+    public List<Product> sortProductsByCategoryId(int categoryId) {
+        List<Product> products = new ArrayList<>();
+        String sql = "SELECT p.*, c.cname as 'ProductCategory' FROM product p INNER JOIN category c ON p.cateID=c.cID WHERE p.cateID=? ORDER BY p.cateID ASC;";
         try {
-            String sql = "SELECT * FROM role WHERE id=?";
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setInt(1, roleId);
-            ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()) {
-                int id = resultSet.getInt("id");
-                String name = resultSet.getString("name");
-                role = new Role(id, name);
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, categoryId);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                String detailName = rs.getString("detailName");
+                String image = rs.getString("image");
+                double price = rs.getDouble("price");
+                String color = rs.getString("color");
+                String size = rs.getString("size");
+                int quantity = rs.getInt("quantity");
+                Category category = new Category(categoryId, rs.getString("ProductCategory"));
+                products.add(new Product(id, name, detailName, image, price, color, size, quantity, category));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return role;
+        return products;
     }
 
     private Category getCategoryById(int categoryId) {
@@ -90,38 +217,15 @@ public class ProductService implements IProductService<Product> {
             String sql = "SELECT * FROM category WHERE cID=?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, categoryId);
-            ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()) {
-                int cID = resultSet.getInt("cID");
-                String cname = resultSet.getString("cname");
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                int cID = rs.getInt("cID");
+                String cname = rs.getString("cname");
                 category = new Category(cID, cname);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return category;
-    }
-
-    private Account getAccountById(int accountId) {
-        Account account = null;
-        try {
-            String sql = "SELECT * FROM account WHERE uID=?";
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setInt(1, accountId);
-            ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()) {
-                int uID = resultSet.getInt("uID");
-                String user = resultSet.getString("user");
-                String pass = resultSet.getString("pass");
-                String address = resultSet.getString("address");
-                int tel = resultSet.getInt("tel");
-                int roleId = resultSet.getInt("role_id");
-                Role role = getRoleById(roleId);
-                account = new Account(uID, user, pass, address, tel, role);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return account;
     }
 }

@@ -7,3 +7,9 @@
 
     height: 100%;
 }
+
+.card-omg {
+    width: 50%; /* Set the desired width */
+    height: 200px; /* Set the desired height */
+    object-fit: cover; /* This will make sure the image covers the entire container while maintaining its aspect ratio */
+}
