@@ -9,6 +9,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,6 +42,9 @@ public class ProductController extends HttpServlet {
                 break;
             case "findAllByCategory":
                 findAllByCategory(request, response);
+                break;
+            case "findProduct":
+                findProduct(request, response);
                 break;
             case "addToCart":
                 addCart(request, response);
@@ -87,6 +91,14 @@ public class ProductController extends HttpServlet {
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("user/home.jsp");
         requestDispatcher.forward(request, response);
 
+    }
+
+    private void findProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String keyword = request.getParameter("keyword");
+        List<Product> productList = productService.findProduct(keyword);
+        request.setAttribute("productList",productList);
+        RequestDispatcher requestDispatcher=request.getRequestDispatcher("user/home.jsp");
+        requestDispatcher.forward(request,response);
     }
 
     private void deleteProduct(HttpServletRequest request, HttpServletResponse response) throws IOException {

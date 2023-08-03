@@ -1,5 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.Base64" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,7 +15,9 @@
           integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
-            crossorigin="anonymous"></script>
+            crossorigin="anonymous">
+
+    </script>
     <%--    <link href="../css/manager.css" rel="stylesheet" type="text/css"/>--%>
     <%--    <link href="../css/style.css" rel="stylesheet" type="text/css"/>--%>
     <%--    <link href="../css/detail.css" rel="stylesheet" type="text/css"/>--%>
@@ -165,11 +169,11 @@
                 </li>
             </ul>
             <div class="d-flex flex-nowrap align-items-center" style="margin-left: 20px">
-                <form class="form-inline mt-2 mt-md-0" method="get" action="search.html">
+                <form class="form-inline mt-2 mt-md-0" method="get" action="http://localhost:8080/user">
+                    <input type="hidden" name="action" value="findProduct">
                     <input class="form-control mr-sm-2" type="text" placeholder="Tìm kiếm" aria-label="Search"
-                           name="keyword_tensanpham">
+                           name="keyword">
                 </form>
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Tìm kiếm</button>
             </div>
         </div>
         <ul class="navbar-nav px-3">
