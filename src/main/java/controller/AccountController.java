@@ -2,6 +2,7 @@ package controller;
 
 
 import fillter.SessionAdmin;
+import fillter.SessionURL;
 import fillter.SessionUser;
 import model.Account;
 import model.Role;
@@ -18,7 +19,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 @WebServlet(name = "AccountController", value = "/Users")
-    public class AccountController extends HttpServlet {
+public class AccountController extends HttpServlet {
     AccountService accountService = new AccountService();
 
     @Override
@@ -30,7 +31,7 @@ import java.sql.SQLException;
                 showFormLogin(request, response);
                 break;
             case "register":
-                showRegisterForm(request , response);
+                showRegisterForm(request, response);
             case "information":
                 showInformation(request, response);
                 break;
@@ -39,8 +40,8 @@ import java.sql.SQLException;
                 break;
 
         }
-    }
 
+    }
 
 
     private void showFormEdit(HttpServletRequest request, HttpServletResponse response) {
@@ -73,6 +74,7 @@ import java.sql.SQLException;
             throw new RuntimeException(e);
         }
     }
+
     private void showRegisterForm(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         RequestDispatcher dispatcher = request.getRequestDispatcher("");
         dispatcher.forward(request, response);
@@ -88,6 +90,7 @@ import java.sql.SQLException;
             throw new RuntimeException(e);
         }
     }
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
@@ -97,7 +100,7 @@ import java.sql.SQLException;
                 break;
             case "register":
                 try {
-                    addRegister(request , response);
+                    addRegister(request, response);
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
@@ -105,24 +108,25 @@ import java.sql.SQLException;
         }
 
     }
-        private void addRegister(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException {
-            String user= request.getParameter("user");
-            String pass = request.getParameter("pass");
-            String customerName = request.getParameter("customerName");
-            String address = request.getParameter("address");
-            String tel = request.getParameter("tell");
-            int role_Id= Integer.parseInt(request.getParameter("role_Id"));
-            Role role = new Role(0,"user");
-            Account account = new Account(user,pass,customerName,address,tel,role);
-            accountService.add(account);
-            response.sendRedirect("/Users?action=login");
+
+    private void addRegister(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException {
+        String user = request.getParameter("user");
+        String pass = request.getParameter("pass");
+        String customerName = request.getParameter("customerName");
+        String address = request.getParameter("address");
+        String tel = request.getParameter("tell");
+        int role_Id = Integer.parseInt(request.getParameter("role_Id"));
+        Role role = new Role(0, "user");
+        Account account = new Account(user, pass, customerName, address, tel, role);
+        accountService.add(account);
+        response.sendRedirect("/Users?action=login");
 
     }
 
     private void checkLogin(HttpServletRequest request, HttpServletResponse response) {
         String userName = request.getParameter("username");
         String password = request.getParameter("password");
-        int id = accountService.getIdUser(userName , password);
+        int id = accountService.getIdUser(userName, password);
 
         if (accountService.checkUser(userName, password)) {
             String role = accountService.getRole(userName, password);
@@ -131,13 +135,13 @@ import java.sql.SQLException;
             session.setAttribute("id", id);
             boolean checkAdmin = SessionAdmin.checkUser(request);
             boolean checkMember = SessionUser.checkUser(request);
-            if(checkAdmin){
+            if (checkAdmin) {
                 try {
                     response.sendRedirect("/user?action=admin");
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
-            }else if(checkMember){
+            } else if (checkMember) {
                 try {
                     response.sendRedirect("/user?action=home");
                 } catch (IOException e) {
