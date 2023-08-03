@@ -77,8 +77,8 @@
                 <div class="card-header bg-primary text-white text-uppercase"><i class="fa fa-list"></i> Sắp xếp theo
                 </div>
                 <ul class="list-group category_block">
-                    <li class="list-group-item text-white"><a href="http://localhost:8080/user?action=">GIÁ TĂNG DẦN</a></li>
-                    <li class="list-group-item text-white"><a href="#">GIÁ GIẢM DẦN</a></li>
+                    <li class="list-group-item text-white"><a href="http://localhost:8080/user?action=sortIncrease">GIÁ TĂNG DẦN</a></li>
+                    <li class="list-group-item text-white"><a href="http://localhost:8080/user?action=sortDecrease">GIÁ GIẢM DẦN</a></li>
                 </ul>
             </div>
 
