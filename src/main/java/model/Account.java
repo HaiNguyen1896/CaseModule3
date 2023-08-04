@@ -28,12 +28,6 @@ public class Account {
         this.role = role;
     }
 
-    public Account(int uID, String username, String password, String customerName, String address, String tel, int role) {
-    }
-
-    public Account(int uID, String username, String password, String customerName, String address, String tel) {
-    }
-
     public int getuID() {
         return uID;
     }

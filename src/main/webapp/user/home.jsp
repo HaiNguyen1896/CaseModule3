@@ -15,11 +15,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
             crossorigin="anonymous"></script>
-<<<<<<< HEAD
-    <link href="../css/style.css" rel="stylesheet" type="text/css"/>
-=======
         <link href="../css/style.css" rel="stylesheet" type="text/css"/>
->>>>>>> b31ef7aa43a8ca6dba53124e587da9cbcd03b83c
 </head>
 <body>
 <nav class="navbar navbar-expand-md navbar-dark sticky-top bg-dark">
@@ -37,21 +33,13 @@
                     <a class="nav-link" href="contact.html">Liên hệ</a>
                 </li>
             </ul>
-
-            <form class="form-inline mt-2 mt-md-0" method="get" action="search.html">
-                <div class="d-flex flex-nowrap align-items-center" style="margin-left: 20px">
+            <div class="d-flex flex-nowrap align-items-center" style="margin-left: 20px">
+                <form class="form-inline mt-2 mt-md-0" method="get" action="search.html">
                     <input class="form-control mr-sm-2" type="text" placeholder="Tìm kiếm" aria-label="Search"
                            name="keyword_tensanpham">
-<<<<<<< HEAD
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" style="margin-left: 10px">Tìm kiếm </button>
-                </div>
-            </form>
-
-=======
                 </form>
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit" style="margin-left: 10px">Tìm kiếm</button>
             </div>
->>>>>>> b31ef7aa43a8ca6dba53124e587da9cbcd03b83c
         </div>
         <ul class="navbar-nav px-3">
             <li class="nav-item text-nowrap">
@@ -81,9 +69,7 @@
                 </div>
                 <ul class="list-group category_block">
                     <c:forEach var="categories" items="${Category}">
-                        <li class="list-group-item text-white"><a
-                                href="http://localhost:8080/user?action=findAllByCategory&id=${categories.id}">${categories.name}</a>
-                        </li>
+                        <li class="list-group-item text-white"><a href="http://localhost:8080/user?action=findAllByCategory&id=${categories.id}">${categories.name}</a></li>
                     </c:forEach>
                 </ul>
             </div>
@@ -91,13 +77,8 @@
                 <div class="card-header bg-primary text-white text-uppercase"><i class="fa fa-list"></i> Sắp xếp theo
                 </div>
                 <ul class="list-group category_block">
-<<<<<<< HEAD
-                    <li class="list-group-item text-white"><a href="#">GIÁ TĂNG DẦN</a></li>
-                    <li class="list-group-item text-white"><a href="#">GIÁ GIẢM DẦN</a></li>
-=======
                     <li class="list-group-item text-white"><a href="http://localhost:8080/user?action=sortIncrease">GIÁ TĂNG DẦN</a></li>
                     <li class="list-group-item text-white"><a href="http://localhost:8080/user?action=sortDecrease">GIÁ GIẢM DẦN</a></li>
->>>>>>> b31ef7aa43a8ca6dba53124e587da9cbcd03b83c
                 </ul>
             </div>
 

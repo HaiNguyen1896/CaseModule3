@@ -1,7 +1,7 @@
 package controller;
 
 
-import  fillter.SessionAdmin;
+import fillter.SessionAdmin;
 import fillter.SessionUser;
 import model.Account;
 import model.Role;
@@ -17,7 +17,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 
-@WebServlet(name = "AccountController", value = "/accounts")
+@WebServlet(name = "AccountController", value = "/User")
 public class AccountController extends HttpServlet {
     AccountService accountService = new AccountService();
 
@@ -45,7 +45,7 @@ public class AccountController extends HttpServlet {
         RequestDispatcher dispatcher = request.getRequestDispatcher("");
         HttpSession session = request.getSession();
         int id = (int) session.getAttribute("id");
-        Account account = accountService.findById(id);
+        Account account = accountService.findUserById(id);
         request.setAttribute("user", account);
         try {
             dispatcher.forward(request, response);
@@ -60,7 +60,7 @@ public class AccountController extends HttpServlet {
         RequestDispatcher dispatcher = request.getRequestDispatcher("");
         HttpSession session = request.getSession();
         int id = (int) session.getAttribute("id");
-        Account account = accountService.findById(id);
+        Account account = accountService.findUserById(id);
         request.setAttribute("user", account);
 
         try {
