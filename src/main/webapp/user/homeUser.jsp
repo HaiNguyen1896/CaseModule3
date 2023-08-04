@@ -56,6 +56,10 @@
                 <!-- Nếu chưa đăng nhập thì hiển thị nút Đăng nhập -->
                 <a class="nav-link" href="#">Trang cá nhân</a>
             </li>
+            <li class="nav-item text-nowrap">
+                <!-- Nếu chưa đăng nhập thì hiển thị nút Đăng nhập -->
+                <a class="nav-link" href="http://localhost:8080/User?action=logout">Đăng xuất</a>
+            </li>
         </ul>
     </div>
 </nav>

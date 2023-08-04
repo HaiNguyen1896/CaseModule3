@@ -37,6 +37,9 @@ public class AccountController extends HttpServlet {
             case "editCustomer":
                 showFormEdit(request, response);
                 break;
+            case "logout":
+                logout(request,response);
+                break;
 
         }
     }
@@ -101,7 +104,11 @@ public class AccountController extends HttpServlet {
                 }
                 break;
         }
-
+    }
+    private void logout(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        HttpSession session = request.getSession();
+        session.invalidate();
+        response.sendRedirect("/User?action=login");
     }
     private void addRegister(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException {
         String user= request.getParameter("user");
@@ -144,7 +151,7 @@ public class AccountController extends HttpServlet {
             }
         } else {
             try {
-                response.sendRedirect("/Users?action=login");
+                response.sendRedirect("/User?action=login");
                 accountService.findAll();
             } catch (IOException e) {
                 throw new RuntimeException(e);

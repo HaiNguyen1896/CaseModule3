@@ -56,6 +56,10 @@
             <li class="nav-item text-nowrap">
                 <a class="nav-link" href="login.html">Admin</a>
             </li>
+            <li class="nav-item text-nowrap">
+                <!-- Nếu chưa đăng nhập thì hiển thị nút Đăng nhập -->
+                <a class="nav-link" href="http://localhost:8080/User?action=logout">Đăng xuất</a>
+            </li>
         </ul>
     </div>
 </nav>
