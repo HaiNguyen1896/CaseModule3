@@ -182,6 +182,14 @@ public class ProductController extends HttpServlet {
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("user/home.jsp");
         requestDispatcher.forward(request, response);
     }
+    private void showHomeUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<Product> product = productService.findAll();
+        List<Category> categories = categoryService.findAll();
+        request.setAttribute("Category", categories);
+        request.setAttribute("productList", product);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("user/homeUser.jsp");
+        requestDispatcher.forward(request, response);
+    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

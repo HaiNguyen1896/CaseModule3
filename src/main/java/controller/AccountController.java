@@ -137,7 +137,7 @@ public class AccountController extends HttpServlet {
                 }
             }else if(checkMember){
                 try {
-                    response.sendRedirect("/user?action=home");
+                    response.sendRedirect("/user?action=homeUser");
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }

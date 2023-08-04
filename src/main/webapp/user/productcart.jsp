@@ -26,12 +26,6 @@
 <main role="main">
     <!-- Nội dung chính trang web -->
     <div class="container mt-4">
-        <div id="thongbao" class="alert alert-danger d-none face" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">×</span>
-            </button>
-        </div>
-
         <h1 class="text-center">Giỏ hàng</h1>
         <div class="row">
             <div class="col col-md-12">

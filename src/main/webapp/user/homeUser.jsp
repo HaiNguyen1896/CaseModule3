@@ -33,27 +33,18 @@
                     <a class="nav-link" href="contact.html">Liên hệ</a>
                 </li>
             </ul>
-<%--            <div class="d-flex flex-nowrap align-items-center" style="margin-left: 20px">--%>
-<%--                <form class="form-inline mt-2 mt-md-0" method="get" action="http://localhost:8080/user">--%>
-<%--                    <input type="hidden" name="action" value="findProduct">--%>
-<%--                    <input class="form-control mr-sm-2" type="text" placeholder="Tìm kiếm" aria-label="Search"--%>
-<%--                           name="keyword">--%>
-<%--                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" style="margin-left: 10px">Tìm kiếm</button>--%>
-<%--                </form>--%>
 
-<%--            </div>--%>
-            <div class="d-flex align-items-center" style="margin-left: 20px;margin-bottom: 10px">
-                <form class="form-inline mt-2 mt-md-0" method="get" action="http://localhost:8080/user">
-                    <input type="hidden" name="action" value="findProduct">--%>
-                    <div class="input-group" style="margin-bottom: 18px">
-                        <input class="form-control" type="text" placeholder="Tìm kiếm" aria-label="Search" name="keyword">
+            <div class="d-flex align-items-center" style="margin-left: 20px;">
+                <form class="form-inline mt-2 mt-md-0" method="get" action="search.html">
+                    <div class="input-group">
+                        <input class="form-control" type="text" placeholder="Tìm kiếm" aria-label="Search" name="keyword_tensanpham">
                         <div class="input-group-append" style="margin-left: 10px">
                             <button class="btn btn-outline-success" type="submit">Tìm kiếm</button>
                         </div>
                     </div>
                 </form>
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit" style="margin-left: 10px">Tìm kiếm</button>
             </div>
+
         </div>
         <ul class="navbar-nav px-3">
             <li class="nav-item text-nowrap">
@@ -61,7 +52,7 @@
             </li>
             <li class="nav-item text-nowrap">
                 <!-- Nếu chưa đăng nhập thì hiển thị nút Đăng nhập -->
-                <a class="nav-link" href="http://localhost:8080/User?action=login">Đăng nhập</a>
+                <a class="nav-link" href="#">Trang cá nhân</a>
             </li>
         </ul>
     </div>
@@ -83,7 +74,9 @@
                 </div>
                 <ul class="list-group category_block">
                     <c:forEach var="categories" items="${Category}">
-                        <li class="list-group-item text-white"><a href="http://localhost:8080/user?action=findAllByCategory&id=${categories.id}">${categories.name}</a></li>
+                        <li class="list-group-item text-white"><a
+                                href="http://localhost:8080/user?action=findAllByCategory&id=${categories.id}">${categories.name}</a>
+                        </li>
                     </c:forEach>
                 </ul>
             </div>
@@ -91,8 +84,8 @@
                 <div class="card-header bg-primary text-white text-uppercase"><i class="fa fa-list"></i> Sắp xếp theo
                 </div>
                 <ul class="list-group category_block">
-                    <li class="list-group-item text-white"><a href="http://localhost:8080/user?action=sortIncrease">GIÁ TĂNG DẦN</a></li>
-                    <li class="list-group-item text-white"><a href="http://localhost:8080/user?action=sortDecrease">GIÁ GIẢM DẦN</a></li>
+                    <li class="list-group-item text-white"><a href="#">GIÁ TĂNG DẦN</a></li>
+                    <li class="list-group-item text-white"><a href="#">GIÁ GIẢM DẦN</a></li>
                 </ul>
             </div>
 
