@@ -2,6 +2,7 @@ package controller;
 
 import fillter.SessionAdmin;
 import fillter.SessionUser;
+import model.Account;
 import model.Category;
 import model.Product;
 import service.AccountService;
@@ -89,8 +90,20 @@ public class ProductController extends HttpServlet {
         request.setAttribute("productList", productList);
         List<Category> categories = categoryService.findAll();
         request.setAttribute("Category", categories);
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("user/home.jsp");
-        requestDispatcher.forward(request, response);
+        HttpSession session = request.getSession();
+        int id = (int) session.getAttribute("id");
+        Account account = accountService.findUserById(id);
+        if (account.getRole().equals("admin")) {
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("user/admin.jsp");
+            requestDispatcher.forward(request, response);
+        } else if (account.getRole().equals("user")) {
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("user/admin.jsp");
+            requestDispatcher.forward(request, response);
+        }else{
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("user/home.jsp");
+            requestDispatcher.forward(request, response);
+        }
+
     }
 
     private void showDetailProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
