@@ -40,7 +40,6 @@
 <%--                           name="keyword">--%>
 <%--                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" style="margin-left: 10px">Tìm kiếm</button>--%>
 <%--                </form>--%>
-
 <%--            </div>--%>
             <div class="d-flex align-items-center" style="margin-left: 20px;margin-bottom: 10px">
                 <form class="form-inline mt-2 mt-md-0" method="get" action="http://localhost:8080/user">
@@ -61,6 +60,7 @@
             <li class="nav-item text-nowrap">
                 <!-- Nếu chưa đăng nhập thì hiển thị nút Đăng nhập -->
                 <a class="nav-link" href="http://localhost:8080/User?action=login">Đăng nhập</a>
+                <p style="color:white">Chào ${sessionScope.idAccount}</p>
             </li>
         </ul>
     </div>
