@@ -41,7 +41,10 @@ public class Product {
         this.quantity = quantity;
         this.category = category;
     }
+    public Product(int id) {
+        this.id = id;
 
+    }
 
     public int getId() {
         return id;

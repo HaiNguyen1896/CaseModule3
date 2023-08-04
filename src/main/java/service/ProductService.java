@@ -48,15 +48,11 @@ public class ProductService implements IProductService<Product> {
         return rowDeleted;
     }
 
-
-
-
     @Override
     public List<Product> findAll() {
         List<Product> products = new ArrayList<>();
         String sql = "select p.*, c.cname as 'ProductCategory' from product p inner join category c on p.cateID=c.cID;";
         try {
-
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
@@ -180,6 +176,7 @@ public class ProductService implements IProductService<Product> {
         }
         return products;
     }
+
     public List<Product> SortByDecreasePrice() {
         List<Product> products = new ArrayList<>();
         String sql = "select p.*, c.cname as 'ProductCategory' from product p inner join category c on p.cateID=c.cID order by price desc ;";
@@ -204,5 +201,53 @@ public class ProductService implements IProductService<Product> {
             e.printStackTrace();
         }
         return products;
+    }
+
+    @Override
+    public List<Product> findProduct(String search) {
+        List<Product> productList = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM product WHERE detailName like concat('%',?,'%');";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, search);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                String detailName = rs.getString("detailName");
+                String image = rs.getString("image");
+                double price = rs.getDouble("price");
+                String color = rs.getString("color");
+                String size = rs.getString("size");
+                int quantity = rs.getInt("quantity");
+                int categoryId = rs.getInt("cateID");
+                Category category = getCategoryById(categoryId);
+                if (category != null) {
+                    Product product = new Product(id, name, detailName, image, price, color, size, quantity, category);
+                    productList.add(product);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return productList;
+    }
+
+    private Category getCategoryById(int categoryId) {
+        Category category = null;
+        try {
+            String sql = "SELECT * FROM category WHERE cID=?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, categoryId);
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                int cID = rs.getInt("cID");
+                String cname = rs.getString("cname");
+                category = new Category(cID, cname);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return category;
     }
 }

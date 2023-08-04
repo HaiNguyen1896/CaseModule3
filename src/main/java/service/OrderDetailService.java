@@ -4,6 +4,7 @@ import fillter.ConnectToMySQL;
 import model.Account;
 import model.Order;
 import model.OrderDetail;
+import model.Product;
 import service.IService.IOderDetail;
 
 import java.sql.Connection;
@@ -11,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class OrderDetailService implements IOderDetail<OrderDetail> {
@@ -36,7 +38,7 @@ public class OrderDetailService implements IOderDetail<OrderDetail> {
         boolean rowDeleted;
         String sql = "delete from orderdetail where id = ?;";
         try (
-            PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+                PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setInt(1, id);
             rowDeleted = preparedStatement.executeUpdate() > 0;
         } catch (SQLException e) {
@@ -47,30 +49,50 @@ public class OrderDetailService implements IOderDetail<OrderDetail> {
 
     @Override
     public List<OrderDetail> findAll() {
-        List<Order> Orderlist = new ArrayList<>();
-        String sql = "select orderdetail.*, account.name,product.name from product inner join orderdetail on orders.userID = account.uID;";
+        List<OrderDetail> Orderlist = new ArrayList<>();
+        String sql = "select orderdetail.*, account.customerName,product.name from product inner join orderdetail on product.id=orderdetail.productID inner join orders on orderdetail.orderID=orders.id inner join account on orders.userID = account.uID;";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 int id = rs.getInt("id");
-                String name = rs.getString("name");
-                int status = rs.getInt("status");
-                int userID = rs.getInt("userID");
-                Account account = new Account(userID);
-                Order order = new Order(id, name, account, status);
-                Orderlist.add(order);
+                Date date = rs.getDate("date");
+                int quantity = rs.getInt("quantity");
+                double totalPrice = rs.getDouble("totalPrice");
+                int orderID = rs.getInt("orderID");
+                int customerID = rs.getInt("uID");
+                Account account = new Account(customerID);
+                Order order = new Order(orderID, account);
+                int productID = rs.getInt("productID");
+                Product product = new Product(productID);
+
+                OrderDetail orderDetail = new OrderDetail(id, order, product, totalPrice, quantity, date);
+                Orderlist.add(orderDetail);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return Orderlist;
     }
-    }
+
 
     @Override
     public boolean edit(int id, OrderDetail orderDetail) {
-        return false;
+        boolean rowUpdate;
+        String sql = "update product set id = ?,quantity=?,totalPrice=?,productID=?,orderID=? where id = ?;";
+        try (
+            PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setInt(1,orderDetail.getId());
+            preparedStatement.setInt(2, orderDetail.getQuantity());
+            preparedStatement.setDouble(3, orderDetail.getTotalPrice());
+            preparedStatement.setInt(4, orderDetail.getProduct().getId());
+            preparedStatement.setInt(5, orderDetail.getOrder().getId());
+            preparedStatement.setInt(6, id);
+            rowUpdate = preparedStatement.executeUpdate() > 0;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return rowUpdate;
     }
 
 

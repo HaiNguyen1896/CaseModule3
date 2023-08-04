@@ -14,6 +14,10 @@ public class Order {
         this.account = account;
         this.status = status;
     }
+    public Order(int id,Account account) {
+        this.id = id;
+        this.account=account;
+    }
 
 
     public String getName() {

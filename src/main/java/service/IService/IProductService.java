@@ -7,4 +7,5 @@ public interface IProductService<E> {
     boolean deleteProduct(int id);
     List<E> findAll();
     boolean edit (int id, E e);
+    List<E> findProduct(String search);
 }

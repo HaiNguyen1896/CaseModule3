@@ -27,6 +27,9 @@ public class Account {
         this.tel = tel;
         this.role = role;
     }
+    public Account(int uID) {
+        this.uID=uID;
+    }
 
     public int getuID() {
         return uID;

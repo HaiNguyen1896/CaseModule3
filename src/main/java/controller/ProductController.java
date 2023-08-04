@@ -1,7 +1,10 @@
 package controller;
 
+import fillter.SessionAdmin;
+import fillter.SessionUser;
 import model.Category;
 import model.Product;
+import service.AccountService;
 import service.CategoryService;
 import service.ProductService;
 
@@ -16,45 +19,76 @@ import java.util.List;
 public class ProductController extends HttpServlet {
     private ProductService productService = new ProductService();
     private CategoryService categoryService = new CategoryService();
+    AccountService accountService = new AccountService();
+
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        accountService.findAll();
+        boolean check = SessionAdmin.checkUser(request);
+        boolean check2 = SessionUser.checkUser(request);
         String action = request.getParameter("action");
         switch (action) {
             case "home":
                 showHome(request, response);
-                break;
-            case "edit":
-                showEditForm(request, response);
-                break;
-            case "create":
-                showFormAdd(request, response);
-                break;
-            case "admin":
-                showFormAdmin(request, response);
-                break;
-            case "manager":
-                showFormManager(request, response);
-                break;
-            case "delete":
-                deleteProduct(request, response);
-                break;
+                return;
             case "findAllByCategory":
                 findAllByCategory(request, response);
-                break;
-            case "addToCart":
-                addCart(request, response);
-                break;
+                return;
             case "sortIncrease":
                 sortIncrs(request, response);
-                break;
+                return;
             case "sortDecrease":
                 sortDecrs(request, response);
-                break;
+                return;
             case "showDetailProduct":
                 showDetailProduct(request, response);
-                break;
+                return;
+
         }
+        if (check2) {
+            switch (action) {
+                case "addToCart":
+                    addCart(request, response);
+                    return;
+            }
+        } else if (check) {
+            switch (action) {
+                case "edit":
+                    showEditForm(request, response);
+                    return;
+                case "create":
+                    showFormAdd(request, response);
+                    return;
+                case "admin":
+                    showFormAdmin(request, response);
+                    return;
+                case "manager":
+                    showFormManager(request, response);
+                    return;
+                case "delete":
+                    deleteProduct(request, response);
+                    return;
+                case "showDetailProduct":
+                    showDetailProduct(request, response);
+                    return;
+                case "findProduct":
+                    findProduct(request, response);
+            }
+        } else {
+            response.sendRedirect("http://localhost:8080/User?action=login");
+
+        }
+    }
+
+    private void findProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String keyword = request.getParameter("keyword");
+        List<Product> productList = productService.findProduct(keyword);
+        request.setAttribute("productList", productList);
+        List<Category> categories = categoryService.findAll();
+        request.setAttribute("Category", categories);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("user/home.jsp");
+        requestDispatcher.forward(request, response);
     }
 
     private void showDetailProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
