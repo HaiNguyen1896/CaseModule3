@@ -98,19 +98,18 @@ public class ProductController extends HttpServlet {
         List<Category> categories = categoryService.findAll();
         request.setAttribute("Category", categories);
         HttpSession session = request.getSession();
-        int id = (int) session.getAttribute("id");
-        Account account = accountService.findUserById(id);
-        if (account.getRole().equals("admin")) {
-            RequestDispatcher requestDispatcher = request.getRequestDispatcher("user/admin.jsp");
-            requestDispatcher.forward(request, response);
-        } else if (account.getRole().equals("user")) {
-            RequestDispatcher requestDispatcher = request.getRequestDispatcher("user/admin.jsp");
-            requestDispatcher.forward(request, response);
-        }else{
+        String role = (String) session.getAttribute("role");
+        if(role==null){
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("user/home.jsp");
             requestDispatcher.forward(request, response);
-        }
 
+        } else if (role.equals("admin")) {
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("admin/admin.jsp");
+            requestDispatcher.forward(request, response);
+        } else  {
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("user/homeUser.jsp");
+            requestDispatcher.forward(request, response);
+        }
     }
 
     private void showDetailProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
