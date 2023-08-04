@@ -54,6 +54,9 @@ public class ProductController extends HttpServlet {
             case "showDetailProduct":
                 showDetailProduct(request, response);
                 break;
+            case "homeUser":
+                showHomeUser(request,response);
+                break;
         }
     }
 
@@ -146,6 +149,14 @@ public class ProductController extends HttpServlet {
         request.setAttribute("Category", categories);
         request.setAttribute("productList", product);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("user/home.jsp");
+        requestDispatcher.forward(request, response);
+    }
+    private void showHomeUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<Product> product = productService.findAll();
+        List<Category> categories = categoryService.findAll();
+        request.setAttribute("Category", categories);
+        request.setAttribute("productList", product);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("user/homeUser.jsp");
         requestDispatcher.forward(request, response);
     }
 

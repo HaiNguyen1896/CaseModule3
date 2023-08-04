@@ -34,13 +34,16 @@
                 </li>
             </ul>
 
-            <form class="form-inline mt-2 mt-md-0" method="get" action="search.html">
-                <div class="d-flex flex-nowrap align-items-center" style="margin-left: 20px">
-                    <input class="form-control mr-sm-2" type="text" placeholder="Tìm kiếm" aria-label="Search"
-                           name="keyword_tensanpham">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" style="margin-left: 10px">Tìm kiếm </button>
-                </div>
-            </form>
+            <div class="d-flex align-items-center" style="margin-left: 20px;">
+                <form class="form-inline mt-2 mt-md-0" method="get" action="search.html">
+                    <div class="input-group">
+                        <input class="form-control" type="text" placeholder="Tìm kiếm" aria-label="Search" name="keyword_tensanpham">
+                        <div class="input-group-append" style="margin-left: 10px">
+                            <button class="btn btn-outline-success" type="submit">Tìm kiếm</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
 
         </div>
         <ul class="navbar-nav px-3">

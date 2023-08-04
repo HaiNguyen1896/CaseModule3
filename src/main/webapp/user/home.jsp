@@ -15,7 +15,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
             crossorigin="anonymous"></script>
-        <link href="../css/style.css" rel="stylesheet" type="text/css"/>
+    <link href="../css/style.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <nav class="navbar navbar-expand-md navbar-dark sticky-top bg-dark">
@@ -33,13 +33,17 @@
                     <a class="nav-link" href="contact.html">Liên hệ</a>
                 </li>
             </ul>
-            <div class="d-flex flex-nowrap align-items-center" style="margin-left: 20px">
+            <div class="d-flex align-items-center" style="margin-left: 20px;">
                 <form class="form-inline mt-2 mt-md-0" method="get" action="search.html">
-                    <input class="form-control mr-sm-2" type="text" placeholder="Tìm kiếm" aria-label="Search"
-                           name="keyword_tensanpham">
+                    <div class="input-group">
+                        <input class="form-control" type="text" placeholder="Tìm kiếm" aria-label="Search" name="keyword_tensanpham">
+                        <div class="input-group-append" style="margin-left: 10px">
+                            <button class="btn btn-outline-success" type="submit">Tìm kiếm</button>
+                        </div>
+                    </div>
                 </form>
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit" style="margin-left: 10px">Tìm kiếm</button>
             </div>
+
         </div>
         <ul class="navbar-nav px-3">
             <li class="nav-item text-nowrap">
@@ -69,7 +73,9 @@
                 </div>
                 <ul class="list-group category_block">
                     <c:forEach var="categories" items="${Category}">
-                        <li class="list-group-item text-white"><a href="http://localhost:8080/user?action=findAllByCategory&id=${categories.id}">${categories.name}</a></li>
+                        <li class="list-group-item text-white"><a
+                                href="http://localhost:8080/user?action=findAllByCategory&id=${categories.id}">${categories.name}</a>
+                        </li>
                     </c:forEach>
                 </ul>
             </div>
@@ -77,8 +83,10 @@
                 <div class="card-header bg-primary text-white text-uppercase"><i class="fa fa-list"></i> Sắp xếp theo
                 </div>
                 <ul class="list-group category_block">
-                    <li class="list-group-item text-white"><a href="http://localhost:8080/user?action=sortIncrease">GIÁ TĂNG DẦN</a></li>
-                    <li class="list-group-item text-white"><a href="http://localhost:8080/user?action=sortDecrease">GIÁ GIẢM DẦN</a></li>
+                    <li class="list-group-item text-white"><a href="http://localhost:8080/user?action=sortIncrease">GIÁ
+                        TĂNG DẦN</a></li>
+                    <li class="list-group-item text-white"><a href="http://localhost:8080/user?action=sortDecrease">GIÁ
+                        GIẢM DẦN</a></li>
                 </ul>
             </div>
 
@@ -109,12 +117,10 @@
                                 <p class="card-text show_txt">${product.detailName}</p>
                                 <div class="row">
                                     <div class="col">
-                                        <p class="btn btn-danger btn-block">${product.price} $</p>
+                                        <p class="btn btn-danger btn-block"
+                                           style="align-items: center; justify-content: center; display: flex">${product.price} $</p>
                                     </div>
-                                    <div class="col">
-                                        <a href="http://localhost:8080/user?action=addToCart&id=${product.id}"
-                                           class="btn btn-success btn-block" style="margin-left: 30px">Mua ngay</a>
-                                    </div>
+
                                 </div>
                             </div>
                         </div>
