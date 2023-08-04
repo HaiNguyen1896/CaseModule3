@@ -277,6 +277,57 @@ public class ProductService implements IProductService<Product> {
         }
         return category;
     }
+    public Product getProductById(int id) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        Product product = null;
+
+        try {
+            // Kết nối đến cơ sở dữ liệu
+            Connection connection = ConnectToMySQL.getConnection();
+
+            // Truy vấn sản phẩm theo id
+            String sql = "SELECT * FROM products WHERE id = ?";
+            stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, id);
+            rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                // Lấy thông tin sản phẩm từ ResultSet và tạo đối tượng Product
+                int productId = rs.getInt("id");
+                String name = rs.getString("name");
+                String detailName = rs.getString("detail_name");
+                String image = rs.getString("image");
+                double price = rs.getDouble("price");
+                String color = rs.getString("color");
+                String size = rs.getString("size");
+                int quantity = rs.getInt("quantity");
+
+                // Lấy thông tin category của sản phẩm (nếu có)
+                int categoryId = rs.getInt("category_id");
+                CategoryService categoryService = new CategoryService();
+                Category category = categoryService.getCategoryById(categoryId);
+
+                // Tạo đối tượng Product
+                product = new Product(productId, name, detailName, image, price, color, size, quantity, category);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            // Đóng các kết nối, PreparedStatement và ResultSet
+            try {
+                if (rs != null) rs.close();
+                if (stmt != null) stmt.close();
+                if (conn != null) conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return product;
+    }
 }
 
 

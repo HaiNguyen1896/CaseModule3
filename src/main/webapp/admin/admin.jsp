@@ -38,12 +38,15 @@
                 <form class="form-inline mt-2 mt-md-0" method="get" action="http://localhost:8080/user">
                     <input type="hidden" name="action" value="findProduct">--%>
                     <div class="input-group" style="margin-bottom: 18px">
-                        <input class="form-control" type="text" placeholder="Tìm kiếm" aria-label="Search" name="keyword">
+                        <input class="form-control" type="text" placeholder="Tìm kiếm" aria-label="Search"
+                               name="keyword">
                         <div class="input-group-append" style="margin-left: 10px">
                             <button class="btn btn-outline-success" type="submit">Tìm kiếm</button>
                         </div>
                     </div>
                 </form>
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit" style="margin-left: 10px">Tìm kiếm
+                </button>
             </div>
         </div>
         <ul class="navbar-nav px-3">

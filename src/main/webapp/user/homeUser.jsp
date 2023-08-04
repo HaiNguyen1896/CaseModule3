@@ -34,10 +34,12 @@
                 </li>
             </ul>
 
-            <div class="d-flex align-items-center" style="margin-left: 20px;">
-                <form class="form-inline mt-2 mt-md-0" method="get" action="search.html">
-                    <div class="input-group">
-                        <input class="form-control" type="text" placeholder="Tìm kiếm" aria-label="Search" name="keyword_tensanpham">
+            <div class="d-flex align-items-center" style="margin-left: 20px;margin-bottom: 10px">
+                <form class="form-inline mt-2 mt-md-0" method="get" action="http://localhost:8080/user">
+                    <input type="hidden" name="action" value="findProduct">--%>
+                    <div class="input-group" style="margin-bottom: 18px">
+                        <input class="form-control" type="text" placeholder="Tìm kiếm" aria-label="Search"
+                               name="keyword">
                         <div class="input-group-append" style="margin-left: 10px">
                             <button class="btn btn-outline-success" type="submit">Tìm kiếm</button>
                         </div>
@@ -106,7 +108,7 @@
         <div class="col-sm-9">
             <div class="row">
                 <c:forEach var="product" items="${productList}">
-                    <div class="col-12 col-md-6 col-lg-4">
+                    <div class="col-12 col-md-6 col-lg-4" style="margin-top: 20px">
                         <div class="card">
                             <img class="card-img-top" src="${product.image}" alt="Card image cap" height="250"
                                  width="250">
@@ -120,7 +122,7 @@
                                     </div>
                                     <div class="col">
                                         <a href="http://localhost:8080/user?action=addToCart&id=${product.id}"
-                                           class="btn btn-success btn-block" style="margin-left: 30px">Mua ngay</a>
+                                           class="btn btn-success btn-block" >Thêm vào giỏ</a>
                                     </div>
                                 </div>
                             </div>

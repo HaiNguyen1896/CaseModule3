@@ -33,19 +33,13 @@
                     <a class="nav-link" href="contact.html">Liên hệ</a>
                 </li>
             </ul>
-<%--            <div class="d-flex flex-nowrap align-items-center" style="margin-left: 20px">--%>
-<%--                <form class="form-inline mt-2 mt-md-0" method="get" action="http://localhost:8080/user">--%>
-<%--                    <input type="hidden" name="action" value="findProduct">--%>
-<%--                    <input class="form-control mr-sm-2" type="text" placeholder="Tìm kiếm" aria-label="Search"--%>
-<%--                           name="keyword">--%>
-<%--                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" style="margin-left: 10px">Tìm kiếm</button>--%>
-<%--                </form>--%>
-<%--            </div>--%>
+
             <div class="d-flex align-items-center" style="margin-left: 20px;margin-bottom: 10px">
                 <form class="form-inline mt-2 mt-md-0" method="get" action="http://localhost:8080/user">
                     <input type="hidden" name="action" value="findProduct">--%>
                     <div class="input-group" style="margin-bottom: 18px">
-                        <input class="form-control" type="text" placeholder="Tìm kiếm" aria-label="Search" name="keyword">
+                        <input class="form-control" type="text" placeholder="Tìm kiếm" aria-label="Search"
+                               name="keyword">
                         <div class="input-group-append" style="margin-left: 10px">
                             <button class="btn btn-outline-success" type="submit">Tìm kiếm</button>
                         </div>
@@ -61,7 +55,6 @@
             <li class="nav-item text-nowrap">
                 <!-- Nếu chưa đăng nhập thì hiển thị nút Đăng nhập -->
                 <a class="nav-link" href="http://localhost:8080/User?action=login">Đăng nhập</a>
-                <p style="color:white">Chào ${sessionScope.idAccount}</p>
             </li>
         </ul>
     </div>
@@ -83,7 +76,9 @@
                 </div>
                 <ul class="list-group category_block">
                     <c:forEach var="categories" items="${Category}">
-                        <li class="list-group-item text-white"><a href="http://localhost:8080/user?action=findAllByCategory&id=${categories.id}">${categories.name}</a></li>
+                        <li class="list-group-item text-white"><a
+                                href="http://localhost:8080/user?action=findAllByCategory&id=${categories.id}">${categories.name}</a>
+                        </li>
                     </c:forEach>
                 </ul>
             </div>
@@ -91,8 +86,10 @@
                 <div class="card-header bg-primary text-white text-uppercase"><i class="fa fa-list"></i> Sắp xếp theo
                 </div>
                 <ul class="list-group category_block">
-                    <li class="list-group-item text-white"><a href="http://localhost:8080/user?action=sortIncrease">GIÁ TĂNG DẦN</a></li>
-                    <li class="list-group-item text-white"><a href="http://localhost:8080/user?action=sortDecrease">GIÁ GIẢM DẦN</a></li>
+                    <li class="list-group-item text-white"><a href="http://localhost:8080/user?action=sortIncrease">GIÁ
+                        TĂNG DẦN</a></li>
+                    <li class="list-group-item text-white"><a href="http://localhost:8080/user?action=sortDecrease">GIÁ
+                        GIẢM DẦN</a></li>
                 </ul>
             </div>
 
@@ -113,7 +110,7 @@
         <div class="col-sm-9">
             <div class="row">
                 <c:forEach var="product" items="${productList}">
-                    <div class="col-12 col-md-6 col-lg-4">
+                    <div class="col-12 col-md-6 col-lg-4" style="margin-top: 20px">
                         <div class="card">
                             <img class="card-img-top" src="${product.image}" alt="Card image cap" height="250"
                                  width="250">

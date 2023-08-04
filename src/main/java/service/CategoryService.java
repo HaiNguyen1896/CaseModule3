@@ -48,8 +48,44 @@ public class CategoryService implements ICategory<Category> {
     public boolean edit(int id, Category category) {
         return false;
     }
+    public Category getCategoryById(int id) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        Category category = null;
 
-    public static void main(String[] args) {
-        
+        try {
+            // Lấy đối tượng Connection đã có từ ConnectToMySQL.getConnection()
+            conn = ConnectToMySQL.getConnection();
+
+            // Truy vấn danh mục theo id
+            String sql = "SELECT * FROM categories WHERE id = ?";
+            stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, id);
+            rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                // Lấy thông tin danh mục từ ResultSet và tạo đối tượng Category
+                String name = rs.getString("name");
+
+                // Tạo đối tượng Category
+                category = new Category(id, name);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            // Đóng PreparedStatement và ResultSet (không đóng Connection vì nó đã được lấy từ ConnectToMySQL.getConnection())
+            try {
+                if (rs != null) rs.close();
+                if (stmt != null) stmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return category;
     }
+
+
 }
