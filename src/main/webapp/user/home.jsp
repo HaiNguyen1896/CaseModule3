@@ -1,7 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="java.util.Base64" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
+<%@ page import="java.util.Base64" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,147 +14,13 @@
           integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
-            crossorigin="anonymous">
-
-    </script>
-    <%--    <link href="../css/manager.css" rel="stylesheet" type="text/css"/>--%>
-    <%--    <link href="../css/style.css" rel="stylesheet" type="text/css"/>--%>
-    <%--    <link href="../css/detail.css" rel="stylesheet" type="text/css"/>--%>
-    <link rel="stylesheet" href="../css/style.css">
-    <style>
-        .list-group-item:hover {
-            background-color: aqua;
-            cursor: pointer;
-
-        }
-
-        .list-group-item a {
-            text-decoration: none;
-        }
-
-        .list-group-item a:hover {
-            background-color: aqua;
-            cursor: pointer;
-        }
-
-        .card-title a,
-        .btn {
-            text-decoration: none;
-        }
-
-        .card-title a:hover,
-        .btn:hover {
-            text-decoration: none;
-        }
-
-        .list-group-item a {
-            font-size: 18px;
-        }
-
-        .breadcrumb-item a {
-            font-size: 18px;
-        }
-
-        .card.bg-light.mb-3 {
-            border: 2px solid #ccc;
-            padding: 20px;
-        }
-
-
-        /* Đặt độ cao cho section jumbotron */
-        .jumbotron {
-            padding: 2rem 1rem;
-            margin-bottom: 2rem;
-            background-color: #dc3545; /* Màu nền */
-            color: #ffc107; /* Màu chữ */
-        }
-
-        /* Đặt kích thước chữ và màu chữ cho tiêu đề */
-        .jumbotron .jumbotron-heading {
-            font-size: 48px;
-            color: #fff;
-        }
-
-        /* Đặt kích thước chữ và màu chữ cho tiêu đề phụ */
-        .jumbotron .jumbotron-subheading {
-            font-size: 36px;
-            color: #fff;
-        }
-
-        /* Tùy chỉnh giao diện của navbar */
-        .navbar {
-            padding: 0.5rem 1rem;
-            background-color: #343a40; /* Màu nền */
-        }
-
-        /* Đặt màu chữ cho navbar link */
-        .navbar .nav-link {
-            color: #fff;
-        }
-
-        /* Đặt màu chữ khi hover đến các navbar link */
-        .navbar .nav-link:hover {
-            color: #ffc107;
-        }
-
-        /* Đặt màu chữ cho navbar brand */
-        .navbar .navbar-brand {
-            color: #fff;
-        }
-
-        /* Đặt màu chữ khi hover đến navbar brand */
-        .navbar .navbar-brand:hover {
-            color: #ffc107;
-        }
-
-        /* Tùy chỉnh giao diện của nút Tìm kiếm trong form */
-        .navbar .form-inline .btn {
-            color: #fff;
-            border-color: #fff;
-        }
-
-        /* Đặt màu chữ khi hover đến nút Tìm kiếm trong form */
-        .navbar .form-inline .btn:hover {
-            color: #343a40;
-            background-color: #ffc107;
-            border-color: #ffc107;
-        }
-
-        /* Tùy chỉnh giao diện cho nút "Giỏ hàng" và "Đăng nhập" */
-        .navbar-nav .nav-item .nav-link {
-            color: #fff;
-        }
-
-        /* Đặt màu chữ khi hover đến các nút "Giỏ hàng" và "Đăng nhập" */
-        .navbar-nav .nav-item .nav-link:hover {
-            color: #ffc107;
-        }
-
-        /* Đặt chiều cao và kích thước chữ cho section breadcrumb */
-        .breadcrumb {
-            padding: 0.75rem 1rem;
-            background-color: #f8f9fa; /* Màu nền */
-            color: #343a40; /* Màu chữ */
-            font-size: 18px; /* Kích thước chữ */
-        }
-
-        /* Đặt kích thước chữ và màu chữ cho breadcrumb link */
-        .breadcrumb .breadcrumb-item a {
-            font-size: 18px;
-            color: #343a40;
-        }
-
-        /* Đặt màu chữ khi hover đến breadcrumb link */
-        .breadcrumb .breadcrumb-item a:hover {
-            color: #ffc107;
-        }
-
-    </style>
+            crossorigin="anonymous"></script>
+        <link href="../css/style.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <nav class="navbar navbar-expand-md navbar-dark sticky-top bg-dark">
     <div class="container">
-        <a class="navbar-brand" href="https://nentang.vn">G3Shop</a>
+        <a class="navbar-brand" href="http://localhost:8080/user?action=home">G3Shop</a>
         <div class="navbar-collapse collapse" id="navbarCollapse">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
@@ -174,6 +39,7 @@
                     <input class="form-control mr-sm-2" type="text" placeholder="Tìm kiếm" aria-label="Search"
                            name="keyword">
                 </form>
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit" style="margin-left: 10px">Tìm kiếm</button>
             </div>
         </div>
         <ul class="navbar-nav px-3">
@@ -190,8 +56,7 @@
 <section class="jumbotron text-center" style="background-color: honeydew; padding: 3rem;">
     <div class="container">
         <h1 class="display-4" style="font-weight: bold; color: #333;">Thương hiệu thời trang hàng đầu Việt Nam</h1>
-        <h2 style="color: gold; font-size: 28px;">Uy tín là vàng</h2>
-        <p style="font-size: 20px; color: #666;">Chào mừng đến với cửa hàng thời trang Nền tảng. Chúng tôi cam kết mang
+        <p style="font-size: 20px; color: #666;">Chào mừng đến với cửa hàng thời trang. Chúng tôi cam kết mang
             đến cho bạn những sản phẩm thời trang chất lượng nhất và dịch vụ tốt nhất.</p>
         <%--        <a class="btn btn-primary btn-lg" href="#" role="button">Xem sản phẩm</a>--%>
     </div>
@@ -213,20 +78,20 @@
                 <div class="card-header bg-primary text-white text-uppercase"><i class="fa fa-list"></i> Sắp xếp theo
                 </div>
                 <ul class="list-group category_block">
-                    <li class="list-group-item text-white"><a href="#">GIÁ TĂNG DẦN</a></li>
-                    <li class="list-group-item text-white"><a href="#">Giá GIẢM DẦN</a></li>
+                    <li class="list-group-item text-white"><a href="http://localhost:8080/user?action=sortIncrease">GIÁ TĂNG DẦN</a></li>
+                    <li class="list-group-item text-white"><a href="http://localhost:8080/user?action=sortDecrease">GIÁ GIẢM DẦN</a></li>
                 </ul>
             </div>
 
 
             <div class="card bg-light mb-3">
-                <div class="card-header bg-success text-white text-uppercase">Last product</div>
+                <div class="card-header bg-success text-white text-uppercase">Sản phẩm nổi bật</div>
                 <div class="card-body">
                     <img class="img-fluid"
                          src="https://oldsailor.com.vn/vnt_upload/product/08_2023/5ad50238abdc788221cd27.jpg"/>
                     <h5 class="card-title">Áo thun</h5>
                     <p class="card-text">Áo thun họa tiết Old Sailor - O.S.L Tennis tee</p>
-                    <p class="bloc_left_price">325000 $</p>
+                    <p class="bloc_left_price">325000 VND</p>
                 </div>
             </div>
 

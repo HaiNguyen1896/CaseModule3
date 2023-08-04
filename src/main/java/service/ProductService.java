@@ -48,6 +48,8 @@ public class ProductService implements IProductService<Product> {
         return rowDeleted;
     }
 
+
+
     @Override
     public List<Product> findAll() {
         List<Product> products = new ArrayList<>();
@@ -102,7 +104,7 @@ public class ProductService implements IProductService<Product> {
         Product product = null;
         String sql = "select name,image,detailName,price,size,color,quantity,cateID from product where id=?;";
         try (
-                PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+                PreparedStatement preparedStatement = connection.prepareStatement(sql);) {
             preparedStatement.setInt(1, id);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
@@ -123,13 +125,14 @@ public class ProductService implements IProductService<Product> {
         }
         return product;
     }
+
     public List<Product> findAllByCategory(int idCategory) {
         List<Product> products = new ArrayList<>();
         String sql = "select p.*, c.cname as 'ProductCategory' from product p inner join category c on p.cateID=c.cID where p.cateID=?;";
         try {
 
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setInt(1,idCategory);
+            preparedStatement.setInt(1, idCategory);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 int idProduct = rs.getInt("id");
