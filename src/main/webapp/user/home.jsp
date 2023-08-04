@@ -44,7 +44,7 @@
         </div>
         <ul class="navbar-nav px-3">
             <li class="nav-item text-nowrap">
-                <a class="nav-link" href="cart.html">Giỏ hàng</a>
+                <a class="nav-link" href="http://localhost:8080/user/productcart.jsp">Giỏ hàng</a>
             </li>
             <li class="nav-item text-nowrap">
                 <!-- Nếu chưa đăng nhập thì hiển thị nút Đăng nhập -->

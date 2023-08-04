@@ -9,7 +9,6 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,9 +45,6 @@ public class ProductController extends HttpServlet {
             case "findProduct":
                 findProduct(request, response);
                 break;
-            case "addToCart":
-                addCart(request, response);
-                break;
             case "sortIncrease":
                 sortIncrs(request, response);
                 break;
@@ -84,16 +80,6 @@ public class ProductController extends HttpServlet {
         requestDispatcher.forward(request, response);
     }
 
-    private void addCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int id = Integer.parseInt(request.getParameter("id"));
-        Product product = productService.selectProduct(id);
-        List<Product> productList = new ArrayList<>();
-        productList.add(product);
-        request.setAttribute("productList", productList);
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("user/productcart.jsp");
-        requestDispatcher.forward(request, response);
-    }
-
     private void findAllByCategory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         List<Product> product = productService.findAllByCategory(id);
@@ -108,11 +94,11 @@ public class ProductController extends HttpServlet {
     private void findProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String keyword = request.getParameter("keyword");
         List<Product> productList = productService.findProduct(keyword);
-        request.setAttribute("productList",productList);
+        request.setAttribute("productList", productList);
         List<Category> categories = categoryService.findAll();
         request.setAttribute("Category", categories);
-        RequestDispatcher requestDispatcher=request.getRequestDispatcher("user/home.jsp");
-        requestDispatcher.forward(request,response);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("user/home.jsp");
+        requestDispatcher.forward(request, response);
     }
 
     private void deleteProduct(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -207,4 +193,5 @@ public class ProductController extends HttpServlet {
         productService.edit(id, product);
         response.sendRedirect("http://localhost:8080/user?action=manager");
     }
+
 }
