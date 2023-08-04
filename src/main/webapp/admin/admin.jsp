@@ -93,7 +93,7 @@
                                 <p class="card-text show_txt">${product.detailName}</p>
                                 <div class="row">
                                     <div class="col">
-                                        <p class="btn btn-danger btn-block">${product.price} </p>
+                                        <p class="btn btn-danger btn-block">d${product.price}</p>
                                     </div>
 
                                     <div class="col">

@@ -47,7 +47,7 @@
             </li>
             <li class="nav-item text-nowrap">
                 <!-- Nếu chưa đăng nhập thì hiển thị nút Đăng nhập -->
-                <a class="nav-link" href="login.html">Đăng nhập</a>
+                <a class="nav-link" href="http://localhost:8080/User?action=login">Đăng nhập</a>
             </li>
         </ul>
     </div>

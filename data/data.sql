@@ -4,6 +4,7 @@ create  table role(
                       id int primary key default 0,
                       name varchar(20) check(name='admin' or name='user')
 );
+
 CREATE TABLE account
 (
     uID     INT AUTO_INCREMENT PRIMARY KEY,
@@ -33,23 +34,27 @@ CREATE TABLE product
     quantity int not null,
     foreign key (cateID) references category (cID)
 );
-create table cart
-(
-    accountID int null,
-    productID INT NOT NULL,
-    amount    int null,
-    foreign key (accountID) references account (uID),
-    foreign key (productID) references product (id)
+
+create table orders(
+                       name varchar(255) null ,
+                       userID int not null,
+                       id int auto_increment primary key ,
+                       status boolean not null ,
+                       foreign key (userID) references account(uID)
 );
+
 create table orderDetail
 (
-    date       DATE   not null,
+    id int auto_increment primary key not null ,
+    date       datetime   default CURRENT_TIMESTAMP,
+    quantity int not null,
     totalPrice double not null,
     productID  int    not null,
-    accountID  int    null,
-    foreign key (accountID) references account (uID),
-    foreign key (productID) references product (id)
+    orderID  int    not null ,
+    foreign key (orderID) references orders (id),
+    foreign key (productID) references product(id)
 );
+
 insert into role(id,name) values (1,'admin');
 insert into role(id,name) values (0,'user');
 INSERT into category(cname)VALUES ('ÁO THUN');

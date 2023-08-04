@@ -19,6 +19,15 @@ public class Account {
         this.role = role;
     }
 
+    public Account(String user, String pass, String customerName, String address, String tel, Role role) {
+        this.user = user;
+        this.pass = pass;
+        this.customerName = customerName;
+        this.address = address;
+        this.tel = tel;
+        this.role = role;
+    }
+
     public int getuID() {
         return uID;
     }
