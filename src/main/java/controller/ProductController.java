@@ -44,6 +44,9 @@ public class ProductController extends HttpServlet {
             case "showDetailProduct":
                 showDetailProduct(request, response);
                 return;
+            case "findProduct":
+                findProduct(request, response);
+                return;
 
         }
         if (check2) {
@@ -72,8 +75,7 @@ public class ProductController extends HttpServlet {
                 case "showDetailProduct":
                     showDetailProduct(request, response);
                     return;
-                case "findProduct":
-                    findProduct(request, response);
+
             }
         } else {
             response.sendRedirect("http://localhost:8080/User?action=login");

@@ -52,7 +52,7 @@
                         </div>
                     </div>
                 </form>
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit" style="margin-left: 10px">Tìm kiếm</button>
+<%--                <button class="btn btn-outline-success my-2 my-sm-0" type="submit" style="margin-left: 10px">Tìm kiếm</button>--%>
             </div>
         </div>
         <ul class="navbar-nav px-3">
