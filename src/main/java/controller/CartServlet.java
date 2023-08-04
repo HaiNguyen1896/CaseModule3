@@ -1,51 +1,55 @@
 package controller;
 
-import model.Product;
 import service.Cart;
+import model.Product;
+import service.ProductService;
 
-import java.io.*;
+import java.io.IOException;
+
 import javax.servlet.ServletException;
-import javax.servlet.http.*;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class CartServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Cart cart = (Cart) request.getSession().getAttribute("cart");
-
-        if (cart == null) {
-            cart = new Cart();
-            request.getSession().setAttribute("cart", cart);
-        }
-
-        request.getRequestDispatcher("cart.jsp").forward(request, response);
+        // Xử lý hiển thị giỏ hàng tại đây (nếu cần)
     }
 
-    @Override
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int productId = Integer.parseInt(request.getParameter("productId"));
-        String productName = request.getParameter("productName");
-        String detailName = request.getParameter("detailName");
-        String image = request.getParameter("image");
-        double productPrice = Double.parseDouble(request.getParameter("productPrice"));
-        String color = request.getParameter("color");
-        String size = request.getParameter("size");
         int quantity = Integer.parseInt(request.getParameter("quantity"));
 
-        Product product = new Product(productId, productName, detailName, image, productPrice, color, size, quantity);
+        ProductService productDAO = new ProductService(); // Giả sử có lớp ProductService để lấy thông tin sản phẩm từ cơ sở dữ liệu
+        Product product = productDAO.getProductById(productId);
 
-        Cart cart = (Cart) request.getSession().getAttribute("cart");
+        if (product != null) {
+            HttpSession session = request.getSession();
+            Cart cart = (Cart) session.getAttribute("cart");
 
-        if (cart == null) {
-            cart = new Cart();
-            request.getSession().setAttribute("cart", cart);
+            if (cart == null) {
+                cart = new Cart();
+                session.setAttribute("cart", cart);
+            }
+
+            // Kiểm tra xem sản phẩm đã có trong giỏ hàng chưa
+            if (cart.containsProduct(product)) {
+                // Nếu đã có thì tăng số lượng sản phẩm trong giỏ hàng
+                cart.updateQuantity(product, quantity);
+            } else {
+                // Nếu chưa có thì thêm sản phẩm vào giỏ hàng với số lượng chỉ định
+                cart.addProduct(product, quantity);
+            }
         }
-
-        cart.addToCart(product);
 
         response.sendRedirect(request.getContextPath() + "/cart");
     }
+
+
 }

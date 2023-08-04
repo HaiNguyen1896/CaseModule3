@@ -54,6 +54,11 @@ public class ProductController extends HttpServlet {
                 case "addToCart":
                     addCart(request, response);
                     return;
+                case "homeUser":
+                    showHomeUser(request,response);
+                    return;
+                case "cart":
+                    showCart(request,response);
             }
         } else if (check) {
             switch (action) {
@@ -82,6 +87,8 @@ public class ProductController extends HttpServlet {
 
         }
     }
+
+
 
     private void findProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String keyword = request.getParameter("keyword");
@@ -192,6 +199,15 @@ public class ProductController extends HttpServlet {
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("user/homeUser.jsp");
         requestDispatcher.forward(request, response);
     }
+    private void showCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<Product> product = productService.findAll();
+        List<Category> categories = categoryService.findAll();
+        request.setAttribute("Category", categories);
+        request.setAttribute("productList", product);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("user/cart.jsp");
+        requestDispatcher.forward(request, response);
+    }
+
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
