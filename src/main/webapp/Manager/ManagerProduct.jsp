@@ -173,7 +173,7 @@
         </div>
     </div>
 </div>
-
+</div>
 
 <script src="js/manager.js" type="text/javascript"></script>
 </body>

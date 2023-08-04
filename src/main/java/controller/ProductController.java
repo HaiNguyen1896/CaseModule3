@@ -54,7 +54,6 @@ public class ProductController extends HttpServlet {
             case "showDetailProduct":
                 showDetailProduct(request, response);
                 break;
-
         }
     }
 
