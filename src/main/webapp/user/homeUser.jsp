@@ -50,11 +50,11 @@
         </div>
         <ul class="navbar-nav px-3">
             <li class="nav-item text-nowrap">
-                <a class="nav-link" href="cart.html">Giỏ hàng</a>
+                <a class="nav-link" href="http://localhost:8080/user?action=showCart">Giỏ hàng</a>
             </li>
             <li class="nav-item text-nowrap">
                 <!-- Nếu chưa đăng nhập thì hiển thị nút Đăng nhập -->
-                <a class="nav-link" href="#">Trang cá nhân</a>
+                <a class="nav-link" href="http://localhost:8080/user?action=showUserInfomation">Trang cá nhân</a>
             </li>
             <li class="nav-item text-nowrap">
                 <!-- Nếu chưa đăng nhập thì hiển thị nút Đăng nhập -->
@@ -90,8 +90,8 @@
                 <div class="card-header bg-primary text-white text-uppercase"><i class="fa fa-list"></i> Sắp xếp theo
                 </div>
                 <ul class="list-group category_block">
-                    <li class="list-group-item text-white"><a href="#">GIÁ TĂNG DẦN</a></li>
-                    <li class="list-group-item text-white"><a href="#">GIÁ GIẢM DẦN</a></li>
+                    <li class="list-group-item text-white"><a href="http://localhost:8080/user?action=sortIncrease">GIÁ TĂNG DẦN</a></li>
+                    <li class="list-group-item text-white"><a href="http://localhost:8080/user?action=sortDecrease">GIÁ GIẢM DẦN</a></li>
                 </ul>
             </div>
 
@@ -122,7 +122,7 @@
                                 <p class="card-text show_txt">${product.detailName}</p>
                                 <div class="row">
                                     <div class="col">
-                                        <p class="btn btn-danger btn-block">${product.price} $</p>
+                                        <p class="btn btn-danger btn-block">${product.price} VNĐ</p>
                                     </div>
                                     <div class="col">
                                         <a href="http://localhost:8080/user?action=addToCart&id=${product.id}"

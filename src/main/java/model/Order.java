@@ -18,6 +18,12 @@ public class Order {
         this.id = id;
         this.account=account;
     }
+    public Order(int id) {
+        this.id = id;
+    }
+    public Order(Account account) {
+        this.account = account;
+    }
 
 
     public String getName() {

@@ -20,7 +20,7 @@
 <body>
 <nav class="navbar navbar-expand-md navbar-dark sticky-top bg-dark">
     <div class="container">
-        <a class="navbar-brand" href="https://nentang.vn">G3Shop</a>
+        <a class="navbar-brand" href="http://localhost:8080/user?action=home">G3Shop</a>
         <div class="navbar-collapse collapse" id="navbarCollapse">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
@@ -66,7 +66,6 @@
 <section class="jumbotron text-center" style="background-color: honeydew; padding: 3rem;">
     <div class="container">
         <h1 class="display-4" style="font-weight: bold; color: #333;">Thương hiệu thời trang hàng đầu Việt Nam</h1>
-        <h2 style="color: gold; font-size: 28px;">Uy tín là vàng</h2>
         <p style="font-size: 20px; color: #666;">Chào mừng đến với cửa hàng thời trang Nền tảng. Chúng tôi cam kết mang
             đến cho bạn những sản phẩm thời trang chất lượng nhất và dịch vụ tốt nhất.</p>
         <%--        <a class="btn btn-primary btn-lg" href="#" role="button">Xem sản phẩm</a>--%>
@@ -103,7 +102,7 @@
                                 <p class="card-text show_txt">${product.detailName}</p>
                                 <div class="row">
                                     <div class="col">
-                                        <p class="btn btn-danger btn-block">d${product.price}</p>
+                                        <p class="btn btn-danger btn-block">${product.price} VNĐ</p>
                                     </div>
 
                                     <div class="col">

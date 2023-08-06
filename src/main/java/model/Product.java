@@ -43,7 +43,10 @@ public class Product {
     }
     public Product(int id) {
         this.id = id;
-
+    }
+    public Product(int id, String name) {
+        this.id = id;
+        this.name = name;
     }
 
     public int getId() {

@@ -23,6 +23,7 @@
             cursor: pointer;
 
         }
+
         .list-group-item a {
             text-decoration: none;
         }
@@ -31,14 +32,17 @@
             background-color: aqua;
             cursor: pointer;
         }
+
         .card-title a,
         .btn {
             text-decoration: none;
         }
+
         .card-title a:hover,
         .btn:hover {
             text-decoration: none;
         }
+
         .list-group-item a {
             font-size: 18px;
         }
@@ -93,86 +97,87 @@
                     <td>
                         <img src="${product.image}">
                     </td>
-                    <td>${product.price} $</td>
+                    <td>${product.price} VNĐ</td>
                     <td>
                         <a href="http://localhost:8080/user?action=edit&id=${product.id}" class="edit"
                            data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Sửa">&#xE254;</i></a>
-                        <a href="http://localhost:8080/user?action=delete&id=${product.id}" class="delete" data-toggle="modal"><i class="material-icons"
-                                                                                                 data-toggle="tooltip"
-                                                                                                 title="Xoá">&#xE872;</i></a>
+                        <a href="http://localhost:8080/user?action=delete&id=${product.id}" class="delete"
+                           data-toggle="modal"><i class="material-icons"
+                                                  data-toggle="tooltip"
+                                                  title="Xoá">&#xE872;</i></a>
                     </td>
                 </tr>
             </c:forEach>
             </tbody>
         </table>
 
-    <a href="http://localhost:8080/user?action=admin">
-        <button type="button" class="btn btn-primary">Quay về</button>
-    </a>
+        <a href="http://localhost:8080/user?action=admin">
+            <button type="button" class="btn btn-primary">Quay về</button>
+        </a>
 
-</div>
-<!-- Edit Modal HTML -->
-<div id="addEmployeeModal" class="modal fade">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <form action="http://localhost:8080/user?action=create" method="post">
-                <div class="modal-header">
-                    <h4 class="modal-title">Thêm sản phẩm mới</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label>Tên sản phẩm</label>
-                        <input name="name" type="text" class="form-control" required>
+    </div>
+    <!-- Edit Modal HTML -->
+    <div id="addEmployeeModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form action="http://localhost:8080/user?action=create" method="post">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Thêm sản phẩm mới</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>Tên sản phẩm</label>
+                            <input name="name" type="text" class="form-control" required>
+                        </div>
 
-                    <div class="form-group">
-                        <label>Ảnh sản phẩm</label>
-                        <input name="image" type="text" class="form-control" required>
-                    </div>
+                        <div class="form-group">
+                            <label>Ảnh sản phẩm</label>
+                            <input name="image" type="text" class="form-control" required>
+                        </div>
 
-                    <div class="form-group">
-                        <label>Mô tả sản phẩm</label>
-                        <input name="detailName" type="text" class="form-control" required>
-                    </div>
+                        <div class="form-group">
+                            <label>Mô tả sản phẩm</label>
+                            <input name="detailName" type="text" class="form-control" required>
+                        </div>
 
-                    <div class="form-group">
-                        <label>Giá sản phẩm</label>
-                        <input name="price" type="number" class="form-control" required>
-                    </div>
+                        <div class="form-group">
+                            <label>Giá sản phẩm</label>
+                            <input name="price" type="number" class="form-control" required>
+                        </div>
 
-                    <div class="form-group">
-                        <label>Size</label>
-                        <input name="size" type="text" class="form-control" required>
-                    </div>
+                        <div class="form-group">
+                            <label>Size</label>
+                            <input name="size" type="text" class="form-control" required>
+                        </div>
 
-                    <div class="form-group">
-                        <label>Màu sản phẩm</label>
-                        <input name="color" type="text" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Số lượng sản phẩm</label>
-                        <input name="quantity" type="number" class="form-control" required>
-                    </div>
+                        <div class="form-group">
+                            <label>Màu sản phẩm</label>
+                            <input name="color" type="text" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Số lượng sản phẩm</label>
+                            <input name="quantity" type="number" class="form-control" required>
+                        </div>
 
-                    <div class="form-group">
-                        <label>Loại sản phẩm</label>
-                        <select name="cateID" class="form-select" aria-label="Default select example">
-                            <c:forEach items="${Category}" var="categories">
-                                <option value="${categories.id}">"${categories.name}"</option>
-                            </c:forEach>
-                        </select>
-                    </div>
+                        <div class="form-group">
+                            <label>Loại sản phẩm</label>
+                            <select name="cateID" class="form-select" aria-label="Default select example">
+                                <c:forEach items="${Category}" var="categories">
+                                    <option value="${categories.id}">"${categories.name}"</option>
+                                </c:forEach>
+                            </select>
+                        </div>
 
-                </div>
-                <div class="modal-footer">
-                    <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                    <input type="submit" class="btn btn-success" value="Add">
-                </div>
-            </form>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                        <input type="submit" class="btn btn-success" value="Add">
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-</div>
 </div>
 
 <script src="js/manager.js" type="text/javascript"></script>

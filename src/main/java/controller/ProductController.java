@@ -2,17 +2,14 @@ package controller;
 
 import fillter.SessionAdmin;
 import fillter.SessionUser;
-import model.Account;
-import model.Category;
-import model.Product;
-import service.AccountService;
-import service.CategoryService;
-import service.ProductService;
+import model.*;
+import service.*;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +18,9 @@ public class ProductController extends HttpServlet {
     private ProductService productService = new ProductService();
     private CategoryService categoryService = new CategoryService();
     AccountService accountService = new AccountService();
+    OrderDetailService orderDetailService = new OrderDetailService();
+    OrderService orderService = new OrderService();
+    List<Product> productCard =new ArrayList<>();
 
 
     @Override
@@ -48,6 +48,12 @@ public class ProductController extends HttpServlet {
             case "findProduct":
                 findProduct(request, response);
                 return;
+            case "showUserInfomation":
+                showUserInformation(request, response);
+                return;
+            case "EditUserInformation":
+                showEditUserInformation(request,response);
+                return;
 
         }
         if (check2) {
@@ -56,10 +62,17 @@ public class ProductController extends HttpServlet {
                     addCart(request, response);
                     return;
                 case "homeUser":
-                    showHomeUser(request,response);
+                    showHomeUser(request, response);
                     return;
                 case "cart":
-                    showCart(request,response);
+                    showCart(request, response);
+                    return;
+                case "showCart":
+                    showMyCart(request,response);
+                    return;
+                case "deleteCartProduct":
+                    deleteCartProduct(request,response);
+
             }
         } else if (check) {
             switch (action) {
@@ -89,6 +102,42 @@ public class ProductController extends HttpServlet {
         }
     }
 
+    private void deleteCartProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        for(int i=0 ; i<productCard.size();i++){
+            if(productCard.get(i).getId()==id){
+                productCard.remove(i);
+            }
+        }
+        request.setAttribute("productList", productCard);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("user/productcart.jsp");
+        requestDispatcher.forward(request, response);
+    }
+
+    private void showMyCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("productList", productCard);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("user/productcart.jsp");
+        requestDispatcher.forward(request, response);
+    }
+
+    private void showEditUserInformation(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        int id = (int) session.getAttribute("id");
+        Account account = accountService.findUserById(id);
+        request.setAttribute("accountInfo", account);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("user/ShowEditInformation.jsp");
+        requestDispatcher.forward(request,response);
+    }
+
+    private void showUserInformation(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//        accountService.findAll();
+        HttpSession session = request.getSession();
+        int id = (int) session.getAttribute("id");
+        Account account = accountService.findUserById(id);
+        request.setAttribute("accountInfo", account);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("user/showInformation.jsp");
+        requestDispatcher.forward(request, response);
+    }
 
 
     private void findProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -99,14 +148,14 @@ public class ProductController extends HttpServlet {
         request.setAttribute("Category", categories);
         HttpSession session = request.getSession();
         String role = (String) session.getAttribute("role");
-        if(role==null){
+        if (role == null) {
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("user/home.jsp");
             requestDispatcher.forward(request, response);
 
         } else if (role.equals("admin")) {
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("admin/admin.jsp");
             requestDispatcher.forward(request, response);
-        } else  {
+        } else {
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("user/homeUser.jsp");
             requestDispatcher.forward(request, response);
         }
@@ -121,27 +170,59 @@ public class ProductController extends HttpServlet {
     }
 
     private void sortDecrs(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<Category> categories = categoryService.findAll();
         List<Product> products = productService.SortByDecreasePrice();
+        request.setAttribute("Category", categories);
         request.setAttribute("productList", products);
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("user/home.jsp");
-        requestDispatcher.forward(request, response);
+        HttpSession session = request.getSession();
+        String role = (String) session.getAttribute("role");
+        if (role == null) {
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("user/home.jsp");
+            requestDispatcher.forward(request, response);
+
+        } else if (role.equals("admin")) {
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("admin/admin.jsp");
+            requestDispatcher.forward(request, response);
+        } else {
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("user/homeUser.jsp");
+            requestDispatcher.forward(request, response);
+        }
     }
 
     private void sortIncrs(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<Category> categories = categoryService.findAll();
         List<Product> products = productService.SortByIncreasePrice();
+        request.setAttribute("Category", categories);
         request.setAttribute("productList", products);
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("user/home.jsp");
-        requestDispatcher.forward(request, response);
+        HttpSession session = request.getSession();
+        String role = (String) session.getAttribute("role");
+        if (role == null) {
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("user/home.jsp");
+            requestDispatcher.forward(request, response);
+
+        } else if (role.equals("admin")) {
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("admin/admin.jsp");
+            requestDispatcher.forward(request, response);
+        } else {
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("user/homeUser.jsp");
+            requestDispatcher.forward(request, response);
+        }
     }
 
     private void addCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         Product product = productService.selectProduct(id);
-        List<Product> productList = new ArrayList<>();
-        productList.add(product);
-        request.setAttribute("productList", productList);
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("user/productcart.jsp");
-        requestDispatcher.forward(request, response);
+//        productList.add(product); đang hoat động
+        productCard.add(product);
+        HttpSession session = request.getSession();
+        int iduser = (int) session.getAttribute("id");
+        Account account = accountService.findUserById(iduser);
+        Order order = new Order(account);
+        orderService.add(order);
+        request.setAttribute("productList", productCard);
+        OrderDetail orderDetail = new OrderDetail(order,product,0,0);
+        orderDetailService.add(orderDetail);
+        response.sendRedirect("http://localhost:8080/user?action=homeUser");
     }
 
     private void findAllByCategory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -150,8 +231,19 @@ public class ProductController extends HttpServlet {
         List<Category> categories = categoryService.findAll();
         request.setAttribute("Category", categories);
         request.setAttribute("productList", product);
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("user/home.jsp");
-        requestDispatcher.forward(request, response);
+        HttpSession session = request.getSession();
+        String role = (String) session.getAttribute("role");
+        if (role == null) {
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("user/home.jsp");
+            requestDispatcher.forward(request, response);
+
+        } else if (role.equals("admin")) {
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("admin/admin.jsp");
+            requestDispatcher.forward(request, response);
+        } else {
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("user/homeUser.jsp");
+            requestDispatcher.forward(request, response);
+        }
 
     }
 
@@ -200,9 +292,21 @@ public class ProductController extends HttpServlet {
         List<Category> categories = categoryService.findAll();
         request.setAttribute("Category", categories);
         request.setAttribute("productList", product);
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("user/home.jsp");
-        requestDispatcher.forward(request, response);
+        HttpSession session = request.getSession();
+        String role = (String) session.getAttribute("role");
+        if (role == null) {
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("user/home.jsp");
+            requestDispatcher.forward(request, response);
+
+        } else if (role.equals("admin")) {
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("admin/admin.jsp");
+            requestDispatcher.forward(request, response);
+        } else {
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("user/homeUser.jsp");
+            requestDispatcher.forward(request, response);
+        }
     }
+
     private void showHomeUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Product> product = productService.findAll();
         List<Category> categories = categoryService.findAll();
@@ -211,6 +315,7 @@ public class ProductController extends HttpServlet {
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("user/homeUser.jsp");
         requestDispatcher.forward(request, response);
     }
+
     private void showCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Product> product = productService.findAll();
         List<Category> categories = categoryService.findAll();
@@ -231,7 +336,21 @@ public class ProductController extends HttpServlet {
             case "create":
                 addProduct(request, response);
                 break;
+            case "editUserInformation":
+                editUserInfor(request,response);
+                break;
         }
+    }
+
+    private void editUserInfor(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        HttpSession session = request.getSession();
+        int id = (int) session.getAttribute("id");
+        String user = request.getParameter("fullname");
+        String address = request.getParameter("address");
+        String tel = request.getParameter("tel");
+        Account account = new Account(id,user,address,tel);
+        accountService.edit(id,account);
+        response.sendRedirect("http://localhost:8080/user?action=showUserInfomation");
     }
 
     private void addProduct(HttpServletRequest request, HttpServletResponse response) throws IOException {

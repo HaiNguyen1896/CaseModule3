@@ -2,6 +2,7 @@ package service;
 
 import fillter.ConnectToMySQL;
 import model.Account;
+import model.Product;
 import model.Role;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -47,7 +48,7 @@ public class AccountService {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                int id = resultSet.getInt("id");
+                int id = resultSet.getInt("uID");
                 String userName = resultSet.getString("user");
                 String pass = resultSet.getString("pass");
                 String customerName= resultSet.getString("customerName");
@@ -100,5 +101,20 @@ public class AccountService {
             }
         }
         return null;
+    }
+    public boolean edit(int id, Account account) {
+        boolean rowUpdate;
+        String sql = "update account set customerName = ?, address=?,tel=? where uID = ?;";
+        try (
+                PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setString(1, account.getCustomerName());
+            preparedStatement.setString(2, account.getAddress());
+            preparedStatement.setString(3, account.getTel());
+            preparedStatement.setInt(4, id);
+            rowUpdate = preparedStatement.executeUpdate() > 0;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return rowUpdate;
     }
 }

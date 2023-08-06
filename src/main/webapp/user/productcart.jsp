@@ -46,7 +46,7 @@
                         <tr>
                             <td>${product.id}</td>
                             <td>
-                                <img src="${product.image}" class="hinhdaidien" style="width: 100%; height: 100%;">
+                                <img src="${product.image}" class="hinhdaidien" style="width: 100px; height: 100px;">
                             </td>
                             <td>${product.detailName}</td>
                             <td class="text-right">
@@ -55,7 +55,7 @@
                             <td class="text-right" id="price_${product.id}">${product.price}</td>
                             <td class="text-right" id="totalPrice_${product.id}">0</td>
                             <td>
-                                <a id="delete_${product.id}" data-sp-ma="${product.id}" class="btn btn-danger btn-delete-sanpham">
+                                <a id="delete_${product.id}" data-sp-ma="${product.id}" class="btn btn-danger btn-delete-sanpham" href="http://localhost:8080/user?action=deleteCartProduct&id=${product.id}" >
                                     <i class="fa fa-trash" aria-hidden="true"></i> Xóa
                                 </a>
                             </td>
@@ -63,7 +63,7 @@
                     </c:forEach>
                     </tbody>
                 </table>
-                <a href="http://localhost:8080/user?action=home" class="btn btn-warning btn-md"><i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp;Quay về trang chủ</a>
+                <a href="http://localhost:8080/user?action=homeUser" class="btn btn-warning btn-md"><i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp;Quay về trang chủ</a>
                 <a href="checkout.html" class="btn btn-primary btn-md" style="margin-left: 20px"><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;Thanh toán</a>
             </div>
         </div>

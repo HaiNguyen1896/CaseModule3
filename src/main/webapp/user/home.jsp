@@ -45,7 +45,7 @@
                         </div>
                     </div>
                 </form>
-<%--                <button class="btn btn-outline-success my-2 my-sm-0" type="submit" style="margin-left: 10px">Tìm kiếm</button>--%>
+                <%--                <button class="btn btn-outline-success my-2 my-sm-0" type="submit" style="margin-left: 10px">Tìm kiếm</button>--%>
             </div>
         </div>
         <ul class="navbar-nav px-3">
@@ -120,7 +120,7 @@
                                 <p class="card-text show_txt">${product.detailName}</p>
                                 <div class="row">
                                     <div class="col">
-                                        <p class="btn btn-danger btn-block">${product.price} $</p>
+                                        <p class="btn btn-danger btn-block">${product.price} VNĐ</p>
                                     </div>
                                     <div class="col">
                                         <a href="http://localhost:8080/user?action=addToCart&id=${product.id}"

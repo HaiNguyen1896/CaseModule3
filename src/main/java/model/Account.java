@@ -27,6 +27,12 @@ public class Account {
         this.tel = tel;
         this.role = role;
     }
+    public Account(int uID, String customerName, String address, String tel) {
+        this.uID = uID;
+        this.customerName = customerName;
+        this.address = address;
+        this.tel = tel;
+    }
     public Account(int uID) {
         this.uID=uID;
     }

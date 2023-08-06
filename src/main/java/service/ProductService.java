@@ -126,6 +126,7 @@ public class ProductService implements IProductService<Product> {
     }
 
     public List<Product> findAllByCategory(int idCategory) {
+        List<Product>productList = new ArrayList<>();
         String sql = "select p.*, c.cname as 'ProductCategory' from product p inner join category c on p.cateID=c.cID where p.cateID=?;";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -143,12 +144,12 @@ public class ProductService implements IProductService<Product> {
                 String nameCategory = rs.getString("ProductCategory");
                 int quantity = rs.getInt("quantity");
                 Category category = new Category(idCategory, nameCategory);
-                products.add(new Product(idProduct, name, detailName, image, price, color, size, quantity, category));
+                productList.add(new Product(idProduct, name, detailName, image, price, color, size, quantity, category));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return products;
+        return productList;
     }
 
 

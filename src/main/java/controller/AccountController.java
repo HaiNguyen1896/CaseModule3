@@ -40,7 +40,6 @@ public class AccountController extends HttpServlet {
             case "logout":
                 logout(request,response);
                 break;
-
         }
     }
 
